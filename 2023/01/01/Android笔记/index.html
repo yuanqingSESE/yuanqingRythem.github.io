@@ -282,25 +282,25 @@
 <p>原因是将加上这条配置的APP进行编译，导致编译后的应用签名和系统签名不一致。</p>
 <p>程序想要运行在系统进程中还要有目标系统的platform key，就是上面的方法二提到的platform.pk8和platform.x509.pem两个文件。用这两个key签名后apk才真正可以放入系统进程中。第一个方法中加入LOCAL_CERTIFICATE :&#x3D; platform其实就是用这两个key来签名。</p>
 <h1 id="项目经验总结"><a href="#项目经验总结" class="headerlink" title="项目经验总结"></a>项目经验总结</h1><ul>
-<li><p>mediaPlayer中的setLooping(true) 可以在播放音乐中调用，也可以通过Service接口如果监听成功调用，传递当前音乐播放状态的方法中全局赋值通过mediaPlayer.setLooping(true)</p>
-</li>
-<li><p>在音乐播放中，使用SeekBar控件开启线程通过Handler向Activity更新进度条，切记一首歌曲播放完成后停掉线程</p>
-</li>
-<li><p>在使用switch中切记要写break；否则执行完case1还会执行case2</p>
-</li>
-<li><p>焦点问题，第一次点击如果没有触发监听，考虑是不是其他监听控件操作设置了焦点</p>
-</li>
-<li><p>第一次点击切换歌曲出现再次播放同样歌曲的情况，考虑在MusicService中的切换歌曲方法的position++ 或position– 变为–position，++position先赋值再操作</p>
-</li>
-<li><p>Notification中多次点击前台服务，android的back键需要点击多次。考虑每次点击前台服务都会入栈很多次，back出栈很多次，使用Activity的启动模式SingleTop，在mainfeast.xml设置任意Activity该Activity总是会在栈顶</p>
-</li>
-<li><pre><code class="language-java">        &lt;activity
-            android:name=&quot;.Activity.PlayingMusicActivity&quot;
-            android:launchMode=&quot;singleTop&quot;/&gt;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* PendingIntent nIntent = PendingIntent.getBroadcast(context,requestcode, pIntent, PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">  主要用来推送服务</span><br><span class="line">  第一个参数，上下文；</span><br><span class="line">  第二个参数，需求码，来标记不同的意图</span><br><span class="line">  第三个参数，意图，包含着要传递的消息体</span><br><span class="line">  第四个参数，有四种，常用的两种：FLAG_CANCEL_CURRENT和FLAG_UPDATE_CURRENT</span><br><span class="line">  FLAG_CANCEL_CURRENT，有个cancel，说明如果使用同一个requestcode的两条pendingintent，只有最新发送的有效</span><br><span class="line">  FLAG_UPDATE_CURRENT，如果requestcode一样，之前的消息体会被最新的覆盖掉</span><br><span class="line"></span><br><span class="line">* Message.obtain()方式相比于直接new对象更高效，通过obtain方法获取Message对象使得Message到了重复的利用，减少了每次获取Message时去申请空间的时间。同时，这样也不会永无止境的去创建新对象，减小了Jvm垃圾回收的压力，提高了效率</span><br><span class="line"></span><br><span class="line">* 如果将context作为参数传入handler会造成内存泄露问题，因为有可能这个context已经要onDestory了但handler还持有这个实例</span><br><span class="line"></span><br><span class="line">问题1：</span><br><span class="line"></span><br><span class="line">Can&#x27;t create handler inside thread that has not called Looper.prepare()</span><br><span class="line"></span><br><span class="line">解决：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"> Looper.prepare()；</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li>mediaPlayer中的setLooping(true) 可以在播放音乐中调用，也可以通过Service接口如果监听成功调用，传递当前音乐播放状态的方法中全局赋值通过mediaPlayer.setLooping(true)</li>
+<li>在音乐播放中，使用SeekBar控件开启线程通过Handler向Activity更新进度条，切记一首歌曲播放完成后停掉线程</li>
+<li>在使用switch中切记要写break；否则执行完case1还会执行case2</li>
+<li>焦点问题，第一次点击如果没有触发监听，考虑是不是其他监听控件操作设置了焦点</li>
+<li>第一次点击切换歌曲出现再次播放同样歌曲的情况，考虑在MusicService中的切换歌曲方法的position++ 或position– 变为–position，++position先赋值再操作</li>
+<li>Notification中多次点击前台服务，android的back键需要点击多次。考虑每次点击前台服务都会入栈很多次，back出栈很多次，使用Activity的启动模式SingleTop，在mainfeast.xml设置任意Activity该Activity总是会在栈顶</li>
 </ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">&quot;.Activity.PlayingMusicActivity&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:launchMode</span>=<span class="string">&quot;singleTop&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PendingIntent nIntent &#x3D; PendingIntent.getBroadcast(context,requestcode, pIntent, PendingIntent.FLAG_UPDATE_CURRENT);<br>主要用来推送服务<br>第一个参数，上下文；<br>第二个参数，需求码，来标记不同的意图<br>第三个参数，意图，包含着要传递的消息体<br>第四个参数，有四种，常用的两种：FLAG_CANCEL_CURRENT和FLAG_UPDATE_CURRENT<br>FLAG_CANCEL_CURRENT，有个cancel，说明如果使用同一个requestcode的两条pendingintent，只有最新发送的有效<br>FLAG_UPDATE_CURRENT，如果requestcode一样，之前的消息体会被最新的覆盖掉</li>
+<li>Message.obtain()方式相比于直接new对象更高效，通过obtain方法获取Message对象使得Message到了重复的利用，减少了每次获取Message时去申请空间的时间。同时，这样也不会永无止境的去创建新对象，减小了Jvm垃圾回收的压力，提高了效率</li>
+<li>如果将context作为参数传入handler会造成内存泄露问题，因为有可能这个context已经要onDestory了但handler还持有这个实例</li>
+</ul>
+<p>问题1：</p>
+<p>Can’t create handler inside thread that has not called Looper.prepare()</p>
+<p>解决：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Looper.prepare()；</span><br></pre></td></tr></table></figure>
+
 <p>问题2：</p>
 <p>getMainLooper()’ on a null object reference</p>
 <p>解决：</p>
