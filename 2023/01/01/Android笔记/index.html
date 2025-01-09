@@ -61,7 +61,7 @@
 <p>不要把耗时处理放在UI主线程。</p>
 <p>死锁导致ANR，检查主线程是否需要这个锁。</p>
 <h2 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h2><p>MVC中View和Controller操作在Activity和Fragment中实现，而MVP将MVC中的Controller变为Presenter。View与Model隔离，Presenter负责完成View层与Model的交互，Controller层响应用户输入进行逻辑处理。</p>
-<p><img src="https://img-blog.csdn.net/20180909214857124?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW5ncXVuc2h1YWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="MVVM"></p>
+<p><img src="/typora-user-images/image-20250109214842503.png" alt="MVVM"></p>
 <h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p> 在MVP的基础上实现数据双向绑定</p>
 <p>Activity和Bean：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ActivityMainBinding binding;</span><br><span class="line">Account yest;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    binding =</span><br><span class="line">            DataBindingUtil.setContentView(<span class="built_in">this</span>, R.layout.activity_main);</span><br><span class="line">    yest = <span class="keyword">new</span> <span class="title class_">Account</span>(<span class="string">&quot;YEST&quot;</span>, <span class="number">100</span>);</span><br><span class="line">    binding.setAccount(yest);</span><br><span class="line">    binding.setActivity(<span class="built_in">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onclick</span><span class="params">(View view)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">level</span> <span class="operator">=</span> yest.getLevel();</span><br><span class="line">    yest.setLevel(level+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -98,7 +98,7 @@
 
 <p>只需要为当前线程创建Looper即可，或者在一个有Looper的线程中创建Handler也行</p>
 <p>Handler的post方法将一个Runnable投递到Handler内部的Looper中去处理，也可以通过Handler的send方法发送一个消息，这个消息同样会在Looper中去处理。post方法也是通过send方法来完成的。当Handler的send方法被调用时，它会调用MessageQueue的enqueueMessage方法将这个消息放入消息队列中，然后Looper发现有新消息到来时，就会处理这个消息，最终消息中的Runnable或者Handler的handleMessage方法就会被调用。注意Looper是运行在创建Handler所在的线程中的，这样一来Handler中的业务逻辑就被切换到创建Handler所在的线程中去执行了</p>
-<p><img src="/./typora-user-images/image-20211020173428649.png" alt="image-20211020173428649"></p>
+<p><img src="/typora-user-images/image-20211020173428649.png" alt="image-20211020173428649"></p>
 <h3 id="ThreadLocal工作原理"><a href="#ThreadLocal工作原理" class="headerlink" title="ThreadLocal工作原理"></a>ThreadLocal工作原理</h3><p>当某些数据是以线程为作用域并且不同线程具有不同的数据副本的时候，就可以考虑采用ThreadLocal。比如对于Handler来说，它需要获取当前线程的Looper，很显然Looper的作用域就是线程并且不同线程具有不同的Looper，这个时候通过ThreadLocal就可以轻松实现Looper在线程中的存取。可以使用ThreadLocal当做监视器贯穿整个线程的执行过程，如果不使用ThreadLocal，可以有以下两种方法</p>
 <ul>
 <li>将监视器通过参数的形式在函数调用栈中进行传递。</li>
@@ -121,7 +121,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D/TestActivity(8676): [Thread#main]mBooleanThreadLocal=true</span><br><span class="line">D/TestActivity(8676): [Thread#1]mBooleanThreadLocal=false</span><br><span class="line">D/TestActivity(8676): [Thread#2]mBooleanThreadLocal=null</span><br></pre></td></tr></table></figure>
 
 <p>ThreadLocal之所以有这么奇妙的效果，是因为不同线程访问同一个ThreadLocal的get方法，ThreadLocal内部会从各自的线程中取出一个数组，然后再从数组中根据当前ThreadLocal的索引去查找出对应的value值。很显然，不同线程中的数组是不同的，这就是为什么通过ThreadLocal可以在不同的线程中维护一套数据的副本并且彼此互不干扰。</p>
-<p>ThreadLocal是一个泛型类，它的定义为public class ThreadLocal<T>，只要弄清楚ThreadLocal的get和set方法就可以明白他的工作原理</p>
+<p>ThreadLocal是一个泛型类，它的定义为public class ThreadLocal<T>，只要弄清楚ThreadLocal的get和set方法就可以明白他的工作原理</T></p>
 <p>JDK1.8前：</p>
 <ul>
 <li><p>set方法中，首先会通过values方法来获取当前线程中的ThreadLocal数据，如何获取呢？其实获取的方式也是很简单的，在Thread类的内部有一个成员专门用于存储线程的ThreadLocal的数据：ThreadLocal.Values localValues，因此获取当前线程的ThreadLocal数据就变得异常简单了。如果localValues的值为null，那么就需要对其进行初始化，初始化后再将ThreadLocal的值进行存储。下面看一下ThreadLocal的值到底是如何在localValues中进行存储的。在localValues内部有一个数组：private Object[] table，ThreadLocal的值就存在在这个table数组中。ThreadLocal的值在table数组中的存储位置总是为ThreadLocal的reference字段所标识的对象的下一个位置，比如ThreadLocal的reference对象在table数组中的索引为index，那么ThreadLocal的值在table数组中的索引就是index+1。最终ThreadLocal的值将会被存储在table数组中：table[index + 1] &#x3D; value。</p>
@@ -163,7 +163,7 @@
 <p>通过Callback可以采用如下方式来创建Handler对象：Handler handler &#x3D; new Handler(callback)。那么Callback的意义是什么呢？源码里面的注释已经做了说明：可以用来创建一个Handler的实例但并不需要派生Handler的子类。在日常开发中，创建Handler最常见的方式就是派生一个Handler的子类并重写其handleMessage方法来处理具体的消息，而Callback给我们提供了另外一种使用Handler的方式，当我们不想派生子类时，就可以通过Callback来实现。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mHandler = <span class="keyword">new</span> <span class="title class_">Handler</span>(<span class="keyword">new</span> <span class="title class_">Handler</span>.Callback() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">handleMessage</span><span class="params">(Message message)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/./typora-user-images/handler%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="handler流程图"></p>
+<p><img src="/typora-user-images/handler%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="handler流程图"></p>
 <p>handler也可以使用特定的Looper来构造</p>
 <p>Handler的无参构造方法会检查当前线程没有Looper的话抛出”Can’t create handler inside thread that has not called Looper.prepare()”的运行时异常。</p>
 <h3 id="主线程消息循环"><a href="#主线程消息循环" class="headerlink" title="主线程消息循环"></a>主线程消息循环</h3><p>Android的主线程就是ActivityThread，主线程的入口方法为main，在main方法中系统会通过Looper.prepareMainLooper()来创建主线程的Looper以及MessageQueue，并通过Looper.loop()来开启主线程的消息循环，这个过程如下所示。</p>
@@ -404,7 +404,7 @@
 
 <h2 id="遇到无法调用在framework中新加的方法，该怎么操作"><a href="#遇到无法调用在framework中新加的方法，该怎么操作" class="headerlink" title="遇到无法调用在framework中新加的方法，该怎么操作"></a>遇到无法调用在framework中新加的方法，该怎么操作</h2><p>因为framework在android中作为动态.jar包的存在，想调用framework中已经存在的方法或者是新加的方法需要在java包下，新建一个android包用于调用</p>
 <p>例如如下格式：</p>
-<p><img src="/./typora-user-images/image-20220331104928251.png" alt="image-20220331104928251"></p>
+<p><img src="/typora-user-images/image-20220331104928251.png" alt="image-20220331104928251"></p>
 <p>这个类里的内容如下：</p>
 <p>只需要写需要调用方法的方法签名（不用写方法体，写方法名和参数），让编译器通过编译，运行时android系统会自动引用framework中的方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> android.location;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LocationManager</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendLocationChange</span><span class="params">(Bundle bundle)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">requestLocationUpdates</span><span class="params">(String provider, <span class="type">long</span> minTime, <span class="type">float</span> minDistance,</span></span><br><span class="line"><span class="params">                                       LocationListener listener)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -491,7 +491,7 @@
 
 <h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><p>懒加载时会遇到什么问题</p>
 <p>看一下这张图</p>
-<p><img src="/typora-user-images%5Cimage-20241227150120431.png" alt="image-20241227150120431"></p>
+<p><img src="/typora-user-images/image-20241227150120431.png" alt="image-20241227150120431"></p>
 <p>这个时候调用getKey会lateinit property key has not been initialized</p>
 <p>因为RwKeyFun的构造函数要等待BaseKeyFuncation完成构造函数走完，那么怎么可以等待初始化完成后在调用呢</p>
 <p>可以对setKey进行重写，在重写中去调用getKey的相关方法</p>

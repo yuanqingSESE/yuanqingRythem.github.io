@@ -46,7 +46,7 @@
 <p>2.Memcached（缓存）+MySQL+垂直拆分（读写分离）</p>
 <p>网站80%的情况下都是在读！每次都要去查询数据库的话就十分的麻烦！所以说我们希望减轻服务器的压力，我们可以使用缓存来保证效率</p>
 <p>发展过程：优化数据结构和索引——&gt;文件缓存（IO）——&gt;Memcached（当时最热门的技术！）</p>
-<p><img src="/../work/typora-user-images/image-20200902101526970.png" alt="image-20200902101526970"></p>
+<p><img src="/typora-user-images/image-20200902101526970.png" alt="image-20200902101526970"></p>
 <p>3.分库分表+水平拆分+MySQL集群</p>
 <p>技术和业务在发展的同时，对人的要求也越来越高！</p>
 <p>本质：数据库（读，写）</p>
@@ -54,11 +54,11 @@
 <p>Innodb：行锁</p>
 <p>慢慢的就开始使用分库分表来解决写的压力！MySQL在那个年代推出了表分区，这个并没有多少公司使用！</p>
 <p>MySQL的集群，三个集群各放三分之一的数据</p>
-<p><img src="/../work/typora-user-images/image-20200902103551116.png" alt="image-20200902103551116"></p>
+<p><img src="/typora-user-images/image-20200902103551116.png" alt="image-20200902103551116"></p>
 <p>MySQL等关系型数据库不够用了数据量很多变化很快</p>
 <p>MySQL有的使用它来存储一些比较大的文件，博客，图片！数据库表很大，效率就低了！如果有一种数据库来专门处理这种数据，MySQL压力就变得十分小了（研究如何处理这些问题！）大数据的IO压力下，表几乎没法更大！</p>
 <p>企业架构：</p>
-<p><img src="/../work/typora-user-images/image-20200902104858989.png" alt="image-20200902104858989"></p>
+<p><img src="/typora-user-images/image-20200902104858989.png" alt="image-20200902104858989"></p>
 <p>为什么要用NoSQL！？</p>
 <p>用户的个人信息，社交网络，地理位置，用户自己产生的数据，用户日志等等爆发式增长！</p>
 <p>这时候我们就需要使用NoSQL数据库的，NoSQL可以很好处理以上的问题</p>
@@ -146,7 +146,7 @@
 <p>   结束进程      命令：kill -15 pid</p>
 <p>redis-benchmark是性能测试工具</p>
 <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>redis默认有16个数据库</p>
-<p><img src="/../work/typora-user-images/image-20200903112506843.png" alt="image-20200903112506843"></p>
+<p><img src="/typora-user-images/image-20200903112506843.png" alt="image-20200903112506843"></p>
 <p>默认使用第0个</p>
 <p>使用select 3 切换到第三个数据库</p>
 <p>keys *代表查看所有的key</p>
@@ -392,7 +392,7 @@
 <li><p>“c”</p>
 </li>
 </ol>
-<h3 id="Hash（哈希）"><a href="#Hash（哈希）" class="headerlink" title="Hash（哈希）"></a>Hash（哈希）</h3><p>Map集合，Key-Map集合!————&gt;key-<key-value>这时候值对应一个map集合!本质上和String类型没有太大区别，还是一个简单的key-value！</p>
+<h3 id="Hash（哈希）"><a href="#Hash（哈希）" class="headerlink" title="Hash（哈希）"></a>Hash（哈希）</h3><p>Map集合，Key-Map集合!————&gt;key-<key-value>这时候值对应一个map集合!本质上和String类型没有太大区别，还是一个简单的key-value！</key-value></p>
 <p>127.0.0.1:6379&gt; hset myhash filed1 yuanqing # set一个具体的key-value</p>
 <p>(integer) 1</p>
 <p>127.0.0.1:6379&gt; hget myhash filed1 #获取一个key-value</p>
@@ -866,7 +866,7 @@
 <p>测试：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">package</span> com.yuanqing;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnection;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SbprojectApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// redisTemplate 操作不同的数据类型</span></span><br><span class="line">        <span class="comment">// opsForValue 操作字符串 类似String</span></span><br><span class="line">        <span class="comment">// opsForList 操作List 类似于List</span></span><br><span class="line">        <span class="comment">// opsForSet</span></span><br><span class="line">        <span class="comment">// opsForZSet</span></span><br><span class="line">        <span class="comment">// opsForHash</span></span><br><span class="line">        <span class="comment">// opsForGeo</span></span><br><span class="line">        <span class="comment">// opsForHyperLogLog</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 除了基本的操作，我们常用的方法都可以直接通过redisTemplate操作，比如事务和基本的crud</span></span><br><span class="line"><span class="comment">//        RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();</span></span><br><span class="line"><span class="comment">//        connection.flushAll();</span></span><br><span class="line"><span class="comment">//        connection.flushDb();</span></span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">&quot;园青&quot;</span>,<span class="string">&quot;太屌了&quot;</span>);</span><br><span class="line">        System.out.println(redisTemplate.opsForValue().get(<span class="string">&quot;园青&quot;</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../work/typora-user-images/image-20201015120759544.png" alt="image-20201015120759544"></p>
+<p><img src="/typora-user-images/image-20201015120759544.png" alt="image-20201015120759544"></p>
 <p>上述红框为序列化配置，默认通过JDK去序列化我们现在要JSON来序列化，那么就需要自定义配置</p>
 <p>序列化的方式有很多在企业中，我们所有的pojo 都会序列化！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line">    <span class="comment">//编写我们自己的redisTemplate</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span>&#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 配置具体的序列化方式</span></span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">        Jackson2JsonRedisSerializer&lt;Object&gt; objectJackson2JsonRedisSerializer = <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>&lt;&gt;(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">objectMapper</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        <span class="comment">// 第一个参数是序列化的域包括set，get，filed方法，第二个参数是修饰符的范围包括public private</span></span><br><span class="line">        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        <span class="comment">// 第一个参数的意思是不做任何验证允许所有子类型，第二个参数是指定序列化输入类型必须是非final修饰的类型</span></span><br><span class="line">        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        objectJackson2JsonRedisSerializer.setObjectMapper(objectMapper);</span><br><span class="line">        <span class="comment">// String的序列化</span></span><br><span class="line">        <span class="type">StringRedisSerializer</span> <span class="variable">stringRedisSerializer</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>();</span><br><span class="line">        <span class="comment">// key采用String的序列化方式</span></span><br><span class="line">        template.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        <span class="comment">// hash的key</span></span><br><span class="line">        template.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        <span class="comment">// value采用Jackson2的序列化方式</span></span><br><span class="line">        template.setValueSerializer(objectJackson2JsonRedisSerializer);</span><br><span class="line">        <span class="comment">// hash的value</span></span><br><span class="line">        template.setHashKeySerializer(objectJackson2JsonRedisSerializer);</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -911,7 +911,7 @@ port 6379 #端口设置
 <p>保存的文件时dump.rdb</p>
 <p>在主从复制中，rdb在从机上备用</p>
 <p>在我们配置文件中的快照进行配置</p>
-<p><img src="/../work/typora-user-images/image-20201027180035396.png" alt="image-20201027180035396"></p>
+<p><img src="/typora-user-images/image-20201027180035396.png" alt="image-20201027180035396"></p>
 <p>配置文件中</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1 <span class="comment">#900秒有1次修改key操作进行RDB持久化</span></span><br><span class="line">save 300 10 <span class="comment">#以此类推</span></span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
 
@@ -936,10 +936,10 @@ port 6379 #端口设置
 <p>1.需要一定的时间间隔！，如果redis意外宕机了，最后一次修改数据就没有了</p>
 <p>2.fork进程的时候，会占用一定的内容空间！！</p>
 <h3 id="AOF（Append-Only-File）"><a href="#AOF（Append-Only-File）" class="headerlink" title="AOF（Append Only File）"></a>AOF（Append Only File）</h3><p>将我们所有的命令都记录下来，history，恢复的时候把这个文件全部执行一遍</p>
-<p><img src="/../work/typora-user-images/image-20201030175255063.png" alt="image-20201030175255063"></p>
+<p><img src="/typora-user-images/image-20201030175255063.png" alt="image-20201030175255063"></p>
 <p>以日志的形式来记录每个写操作，将Redis执行过的所有指令记录下来（读操作不记录），只需追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话，就会根据日志文件将”写“指令从头到尾执行一遍，以完成数据的恢复</p>
 <p>默认是不开启的我们需要手动进行配置:vim redis.conf之后&#x2F;APPEND，找到appendonly no改为yes</p>
-<p><img src="/../work/typora-user-images/image-20201118110010531.png" alt="image-20201118110010531"></p>
+<p><img src="/typora-user-images/image-20201118110010531.png" alt="image-20201118110010531"></p>
 <p>redis-cli</p>
 <p>shutdown</p>
 <p>redis-server redis.conf</p>
@@ -968,16 +968,16 @@ port 6379 #端口设置
 <p>相对数据文件来说，aof远远大于rdb，修复的速度也比rdb慢</p>
 <p>aof运行效率也要比rdb慢，所以redis默认的持久化是aof，不是rdb</p>
 <p>总结：</p>
-<p><img src="/../work/typora-user-images/image-20201208111542828.png" alt="image-20201208111542828"></p>
+<p><img src="/typora-user-images/image-20201208111542828.png" alt="image-20201208111542828"></p>
 <p>性能建议：</p>
-<p><img src="/../work/typora-user-images/image-20201208111615697.png" alt="image-20201208111615697"></p>
+<p><img src="/typora-user-images/image-20201208111615697.png" alt="image-20201208111615697"></p>
 <h2 id="redis-发布订阅"><a href="#redis-发布订阅" class="headerlink" title="redis 发布订阅"></a>redis 发布订阅</h2><h3 id="发布订阅模式中的角色"><a href="#发布订阅模式中的角色" class="headerlink" title="发布订阅模式中的角色"></a>发布订阅模式中的角色</h3><ul>
 <li>发布者（publisher）</li>
 <li>订阅者（subscriber）</li>
 <li>频道（channel）</li>
 </ul>
 <p>如图所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/9197037-4b6002ef023ce56e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+<p><img src="/typora-user-images/image-20250109220645561.png" alt="img"></p>
 <p>发布者发布消息到频道，订阅了频道的订阅者可以收到消息，订阅者可以订阅不同的频道。</p>
 <h3 id="通信模型"><a href="#通信模型" class="headerlink" title="通信模型"></a>通信模型</h3><ul>
 <li>RedisServer中可以创建若干channel</li>
@@ -998,7 +998,7 @@ port 6379 #端口设置
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; publish yuanqing jingrishaonianliubowen</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
 
 <p>通过SUBSCRIBE命令订阅某频道后，redis-server里维护了一个字典，字典的键就是一个个频道！而字典的值则是一个链表，链表中保存了所有订阅这个channel的客户端。SUBSCRIBE命令的关键，就是将客户端添加到给定的channel的订阅链表中。</p>
-<p><img src="/../work/typora-user-images/image-20201209123846582.png" alt="image-20201209123846582"></p>
+<p><img src="/typora-user-images/image-20201209123846582.png" alt="image-20201209123846582"></p>
 <p>通过PUBLISH命令向订阅者发送消息，redis-server会使用给定的频道作为键，在它维护的channel字典中查找记录了订阅这个频道的素有客户端的链表，遍历这个链表，将消息发布给所有订阅者</p>
 <p>PUB&#x2F;SUB从字面上理解就是发布与订阅，在redis中，你可以设定对某一个key值进行消息发布及消息订阅，当一个key值进行了消息发布后，所有订阅它的客户端都会收到相应的消息。</p>
 <p>实时消息，聊天</p>
@@ -1040,12 +1040,12 @@ port 6379 #端口设置
 </tbody></table>
 <h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><p>主从复制，是指将一台Redis服务器的数据，复制到其他的Redis服务器，前者称为主节点，后者称为从节点，数据的复制是单向的，只能由主节点到从节点。Master以写为主，Slave以读为主，一个主节点可以有多个从节点，一个从节点只能有一个主节点，其实就是读写分离，减缓服务器的压力！架构总经常使用，一主二从的模式</p>
 <p>作用如下：</p>
-<p><img src="/../work/typora-user-images/image-20201222165143823.png" alt="image-20201222165143823"></p>
+<p><img src="/typora-user-images/image-20201222165143823.png" alt="image-20201222165143823"></p>
 <p>一般来说要将Redis运用于工程项目中，只使用一台redis是万万不能的（宕机），原因如下：</p>
 <p>从结构上，单个redis服务器会发生单点故障，并且一台服务器所需要的处理所有的请求负载，压力较大</p>
 <p>从容量上，单个redis服务器内存容量有限，就算一台Redis服务器内存容量为256G，也不能将所有内存用作redis存储内存，一般来说，单台redis最大使用内存不应该超过20G。</p>
 <p>电商网站上的商品，一般都是一次上传，无数次浏览的，多读少写</p>
-<p><img src="/../work/typora-user-images/image-20201224102610344.png" alt="image-20201224102610344"></p>
+<p><img src="/typora-user-images/image-20201224102610344.png" alt="image-20201224102610344"></p>
 <p>环境配置只配置从库不用配置主库</p>
 <p>主从配置：永久配置从配置文件中进行配置</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">【linux12(10.0.0.12)】:</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install redis</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">【linux14(10.0.0.14)】:</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install redis</span><br><span class="line">Copy</span><br></pre></td></tr></table></figure>
@@ -1090,7 +1090,7 @@ port 6379 #端口设置
 <p>层层链路</p>
 </blockquote>
 <p>上一个M连接下一个S</p>
-<p><img src="/../work/typora-user-images/image-20201231123218259.png" alt="image-20201231123218259"></p>
+<p><img src="/typora-user-images/image-20201231123218259.png" alt="image-20201231123218259"></p>
 <p>这时候也可以完成我们的主从复制</p>
 <blockquote>
 <p>如果没有老大了，这个时候能不能选择一个老大出来呢？手动！</p>
@@ -1100,8 +1100,8 @@ port 6379 #端口设置
 <h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><p>主从切换技术的方法是：当服务器宕机后，需要手动把一台从服务器切换为主服务器，这就需要人工干预，费时费力，还会造成一段时间内服务不可用。这不是一种推荐的方式，更多时候，我们优先考虑哨兵模式</p>
 <p>谋朝篡位的自动版，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库。</p>
 <p>哨兵模式是一种特殊的模式，首先Redis提供了哨兵的命令，哨兵是一个独立的进程，作为进程，他会独立运行，其原理是<strong>哨兵通过发送命令，等待Redis服务器响应，从而监控多个Redis实例。</strong></p>
-<p><img src="/../work/typora-user-images/image-20201231155313634.png" alt="image-20201231155313634"></p>
-<p><img src="/../work/typora-user-images/image-20201231155526609.png" alt="image-20201231155526609"></p>
+<p><img src="/typora-user-images/image-20201231155313634.png" alt="image-20201231155313634"></p>
+<p><img src="/typora-user-images/image-20201231155526609.png" alt="image-20201231155526609"></p>
 <p>假设主服务器宕机，哨兵1先检测到这个结果，系统并不会马上进行failover(故障转移)过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象称为<strong>主观下线</strong>。当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，那么哨兵之间就会进行一次投票，投票的结果由一个哨兵发起，进行failover（故障转移）。切换成功后通过发布订阅模式，让各个哨兵把自己监控的从服务器实现切换主机，这个过程称为<strong>客观下线</strong>。</p>
 <p>1，配置哨兵</p>
 <p>vim sentinel.conf</p>
@@ -1112,7 +1112,7 @@ port 6379 #端口设置
 <p>redis-sentinel sentinel.conf（哨兵配置文件）</p>
 <p>如果Master节点断开了，这个时候就会从从机中随机选择一个服务器！（这里面有一个投票算法）</p>
 <p>哨兵日志</p>
-<p><img src="/../work/typora-user-images/image-20201231185027821.png" alt="image-20201231185027821"></p>
+<p><img src="/typora-user-images/image-20201231185027821.png" alt="image-20201231185027821"></p>
 <p>由此得出最先的主机是6381</p>
 <p><strong>如果主机此时回来了，只能归并到新的主机下，当做从机，这就是哨兵模式的规则！</strong></p>
 <blockquote>
@@ -1131,18 +1131,18 @@ port 6379 #端口设置
 <h2 id="缓存穿透和雪崩"><a href="#缓存穿透和雪崩" class="headerlink" title="缓存穿透和雪崩"></a>缓存穿透和雪崩</h2><p>在这里不会详细分析解决方案的底层</p>
 <p>Redis缓存的使用，极大的提升了应用程序的性能和效率，特别是数据查询方面。但同时，它也带来了一些问题。其中最要害的问题，就是<strong>缓存穿透，缓存雪崩，和缓存击穿</strong>。</p>
 <h3 id="缓存穿透-查不到"><a href="#缓存穿透-查不到" class="headerlink" title="缓存穿透(查不到)"></a>缓存穿透(查不到)</h3><p>缓存穿透的概念很简单，用户想要查询一个数据，发现redis内存数据库没有，也就是缓存没有命中，于是向持久层数据库查询。发现也没有，于是本次查询失败，当用户很多的时候，缓存都没有命中（秒杀），于是都去请求了持久层数据库，这会给持久层数据库造成很大的压力，这时候就相当于出现了缓存穿透。</p>
-<p><img src="/../work/typora-user-images/image-20210107190957720.png" alt="image-20210107190957720"></p>
+<p><img src="/typora-user-images/image-20210107190957720.png" alt="image-20210107190957720"></p>
 <p>如何解决？</p>
 <p>1.在请求的时候加过滤器</p>
 <p><strong>布隆过滤器</strong></p>
 <p>多所有可能的查询的参数以hash形式存储，在控制层先进行校验，不符合则丢弃，从而避免了对底层存储系统的查询压力；</p>
 <p>2.假设缓存没有命中那么就给赋一个空值，用户请求出来就是空的</p>
-<p><img src="/../work/typora-user-images/image-20210108174221043.png" alt="image-20210108174221043"></p>
+<p><img src="/typora-user-images/image-20210108174221043.png" alt="image-20210108174221043"></p>
 <p><strong>缓存空对象</strong></p>
 <p>会存在两个问题：</p>
 <p>1，如果空值能够被缓存起来，这就意味着缓存需要更多地空间存储更多地键，因为这当中可能会有很多的空值的键；</p>
 <p>2，即使对空值设置了过期时间，还是会存在缓存层和存储层的数据会有一段时间窗口的不一致，这对需要保持一致性的业务会有影响。例如存储层已经有了但缓存没有</p>
-<p><img src="/../work/typora-user-images/image-20210108174048056.png" alt="image-20210108174048056"></p>
+<p><img src="/typora-user-images/image-20210108174048056.png" alt="image-20210108174048056"></p>
 <h3 id="缓存击穿-量太大"><a href="#缓存击穿-量太大" class="headerlink" title="缓存击穿(量太大)"></a>缓存击穿(量太大)</h3><p>例如微博有一个热搜所有人都去访问这个时候并发量是巨大的，假如这个key设置了60秒过期，60.1秒后请求数据库在设到redis缓存中，在这0.1秒的瞬间可能会有大量的请求直接请求数据库，被称为缓存击穿，这可能会导致微博宕机。</p>
 <p>也就是当某个key在过期的瞬间，有大量的请求并发访问，这类数据一般都是热点数据，由于缓存过期，会同时访问数据库来查询最新数据，并且写回缓存，会导致使数据库压力瞬间过大</p>
 <blockquote>
@@ -1151,13 +1151,13 @@ port 6379 #端口设置
 <p><strong>设置热点数据不过期</strong></p>
 <p><strong>加互斥锁</strong></p>
 <p>分布式锁：使用分布式锁，保证对于每个key同时只有一个线程去查询后端服务，其他线程没有获得分布式锁的权限，因此只需哟等待即可</p>
-<p><img src="/../work/typora-user-images/image-20210108182849169.png" alt="image-20210108182849169"></p>
+<p><img src="/typora-user-images/image-20210108182849169.png" alt="image-20210108182849169"></p>
 <h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><blockquote>
 <p>概念</p>
 </blockquote>
 <p>缓存雪崩，是指在某一时间段，缓存集中过期失效。或者Redis宕机！</p>
 <p>产生雪崩的原因之一，比如在写文本的时候，马上就要到双12零点，很快就会迎来一波抢购，这波商品时间比较集中的放入了缓存，假设缓存一个小时，那么到了凌晨一点钟的时候，这批商品的缓存就都过期了。而这批商品的访问查询，都落到了数据库上，对于数据库而言，就会产生周期性压力波峰。于是所有请求都会到达存储层，存储层的调用量会暴增，造成存储层也会挂掉的情况。</p>
-<p><img src="/../work/typora-user-images/image-20210111103514953.png" alt="image-20210111103514953"></p>
+<p><img src="/typora-user-images/image-20210111103514953.png" alt="image-20210111103514953"></p>
 <p>其实集中过期，倒不是非常致命的，比较致命的缓存雪崩，是缓存服务器某个节点宕机或断网，因为自然形成的缓存雪崩，一定是在某个时间段集中创建缓存，这个时候，数据库也是可以顶住压力的，无非就是对数据库产生周期性的压力而已，而缓存服务节点的宕机，对数据库服务器造成的压力是不可预知的，很有可能瞬间就把数据库压垮。</p>
 <p>双11：停掉一些服务，（保证主要的服务可用），比如在双11的时候退款，直接告诉你，当天业务繁忙不能退款</p>
 <blockquote>
