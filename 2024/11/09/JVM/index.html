@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        蒙园青Rythem的博客
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            JVM学习
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">java</span>.lang.Thread()&#123;</span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;你是AKA&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;.start();</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">java</span>.lang.Thread(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;大AKA&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen        51140;</span><br><span class="line">    server_name   localhost;</span><br><span class="line">    写跨域问题</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /home/ruoyi/projects/xiangmu/dist;</span><br><span class="line">        try_files $uri $uri/ /index.html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>守护进程执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install forever -g #安装</span><br><span class="line">forever start app.js #启动</span><br><span class="line">forever stop app.js #关闭</span><br><span class="line">forever start -l forever.log -o out.log -e err.log app.js #输出日志和错误</span><br></pre></td></tr></table></figure>
+
+<p>服务器地址：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">蒙园青    华北2 E    172.17.231.180    i-2ze50hce9r0oo66kv3ui    47.93.150.59    http://47.93.150.59:51120/gitbook/    http://47.93.150.59:51110/swagger-ui.html#/</span><br><span class="line"></span><br><span class="line">本机Swagger地址:</span><br><span class="line">http://localhost:8080/swagger-ui.html#/</span><br><span class="line">APP页面</span><br><span class="line">http://47.93.150.59:51120/</span><br><span class="line">PC页面</span><br><span class="line">http://47.93.150.59:51130/</span><br></pre></td></tr></table></figure>
+
+<p>逻辑：根据请求接口数据，将每次接口返回的数组数据中，最后一项差值-倒数第二项差值的值，组成一个新的数组，新数组中，值&#x3D;0，累加一次计数器，计数器&#x3D;8，打鼾标志是，否则打鼾标志为否</p>
+<p>新数组中如果值不等于0，第二个计数器+1，如果第二个计数器值大于0翻身次数+1</p>
+<h1 id="JVM位置"><a href="#JVM位置" class="headerlink" title="JVM位置"></a>JVM位置</h1><p>1 Java在执行某一个方法会开辟内存作为栈帧，开始运行先开辟线程栈，运行main方法入栈作为栈帧，main方法内还有方法继续入栈作为栈帧，执行完毕出栈<br>2 在.class文件中执行javap 这是java自带的，javap-c进行反编译将.class字节码编译成我们能看懂的JVM运行的代码</p>
+<p>3 局部变量名放this</p>
+<p>iconst_1:将1压入操作数栈</p>
+<p>istore_1:将1出栈，赋值给局部变量表里的值</p>
+<p>iload_1:将局部变量表里的装载出来放到操作数栈</p>
+<p>iadd：从操作数栈弹出做加法，并将结果从新压入操作数栈</p>
+<p>bipush   10：往操作数栈放入10</p>
+<p>如下图：程序计数器的值由字节码执行引擎修改 ，操作数栈是做加减乘除临时的内存空间，方法出口记录到执行完方法后返回到main方法的哪一步，局部变量表放的是对象在堆里面的内存地址。</p>
+<p>new出的对象放在Eden园区，Eden园区放满后就会触发轻GC，存货的对象复制到from区，剩下的全部GC，经过GC没有被干掉分代年龄+1，分代年龄放在对象头中，分代年龄到15后到达老年代</p>
+<p>GC的原理就是通过GCroots一般是方法引用什么的。一直往下走，找到的对象都标记为非垃圾对象，其余未标记的都是垃圾对象</p>
+<p>什么对象会到老年代？单例模式的对象，数据库连接池 ，老年代放满后会进行fullGC，最后回收都回收不了OOM(内存溢出)</p>
+<p>jvisualvm，JDK自带调优工具</p>
+<p>arthas，阿里调优工具</p>
+<p>我们要减轻fullGC,通过使用STW,来实现如果我们在GC的过程中线程程序还在继续往下走，刚刚GC完又有一堆垃圾，所以在GC的适合要暂停线程往下走，这叫STW</p>
+<p><img src="/typora-user-images/image-20210316180400224.png" alt="image-20210316180400224"></p>
+<p><img src="/typora-user-images/image-20210316180602268.png" alt="image-20210316180602268"></p>
+<p>在执行math.compute方法时其实java中把这些方法都当作符号—》转变为在方法区的内存地址，找到compute得代码</p>
+<p><img src="/typora-user-images/image-20210320163328788.png" alt="image-20210320163328788"></p>
+<p>-XX：UseBiasedLocking：是否打开偏向锁</p>
+<p>-XX：BiasedLockingStartupDelay默认是四秒</p>
+<p>AQS是一个JAVA线程同步的框架，是JDK中很多锁工具的核心实现框架。</p>
+<p>AQS维护了一个信号量和state和一个线程组成的双向链表队列。其中这个线程队列就是用来给线程排队的而state就像一个红绿灯，用来控制线程排队或者放行的。在不同场景下，有不同的意义</p>
+<p>在可重入锁这个场景下，state表示加锁的次数。0表示无锁，每加一次锁，state就加1。释放锁state就减1。</p>
+<p>JVM其实是一个软件，处于操作系统之上，操作系统之下是硬件</p>
+<p><img src="/typora-user-images/image-20200614185151839.png" alt="image-20200614185151839"></p>
+<p>类加载器：加载Class文件 Student student&#x3D;new Student(); 实例在栈里，具体的人在堆里，（student名字在栈里，有内存地址，而具体的数据在堆里，通过内存地址去找）类是一个模板而对象是具体的</p>
+<p>类装载器负责加载 .class 文件,class 文件在文件开头有特定的文件标示(cafe babe),将.class文件加载到内存中，将其放在运行时数据区的<strong>方法区</strong>（放类的描述信息）内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构， ClassLoader 只负责 class 文件的加载,至于它是否可以运行,则由 Execution Engine 决定。ClassLoader有多个</p>
+<p>例如：<img src="/typora-user-images/image-20200615151428025.png" alt="image-20200615151428025"></p>
+<p>所以垃圾一般都在堆里存在</p>
+<p><img src="/typora-user-images/image-20200615151830442.png" alt="image-20200615151830442"></p>
+<p>类加载器有好几种，</p>
+<p>1.虚拟机自带的加载器</p>
+<p>2.启动类（根）加载器</p>
+<p>3.扩展类加载器</p>
+<p>4.应用程序加载器</p>
+<p><img src="/typora-user-images/image-20200615152614587.png" alt="image-20200615152614587"></p>
+<p>双亲委派机制保证安全</p>
+<p><img src="/typora-user-images/image-20200615153849226.png" alt="image-20200615153849226"></p>
+<p>运行时会想上找先找的 APP（应用程序加载器）—-&gt;EXC（扩展类加载器）—-&gt;根加载器（最终执行）</p>
+<p>1.类加载器收到类加载请求</p>
+<p>2.将这个请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器</p>
+<p>3.启动类加载器检查是否能够加载这个类，能加载就结束，使用当前的加载器，否再，抛出异常，通知子类加载器进行加载</p>
+<p>4.重复步骤3</p>
+<p>Class Not Found</p>
+<p>null java调用不到~ Java&#x3D;C++–:去掉繁琐的东西，如指针，内存管理交给JVM</p>
+<h2 id="什么是双亲委派机制"><a href="#什么是双亲委派机制" class="headerlink" title="什么是双亲委派机制"></a>什么是双亲委派机制</h2><p>当某个类加载器需要加载某个<code>.class</code>文件时，它首先把这个任务委托给他的上级类加载器，递归这个操作，如果上级的类加载器没有加载，自己才会去加载这个类。</p>
+<h3 id="类加载器的类别"><a href="#类加载器的类别" class="headerlink" title="类加载器的类别"></a>类加载器的类别</h3><h4 id="BootstrapClassLoader（启动类加载器）"><a href="#BootstrapClassLoader（启动类加载器）" class="headerlink" title="BootstrapClassLoader（启动类加载器）"></a>BootstrapClassLoader（启动类加载器）</h4><p><code>c++</code>编写，加载<code>java</code>核心库 <code>java.*</code>,构造<code>ExtClassLoader</code>和<code>AppClassLoader</code>。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作</p>
+<h4 id="ExtClassLoader-（标准扩展类加载器）"><a href="#ExtClassLoader-（标准扩展类加载器）" class="headerlink" title="ExtClassLoader （标准扩展类加载器）"></a>ExtClassLoader （标准扩展类加载器）</h4><p><code>java</code>编写，加载扩展库，如<code>classpath</code>中的<code>jre</code> ，<code>javax.*</code>或者<br> <code>java.ext.dir</code> 指定位置中的类，开发者可以直接使用标准扩展类加载器。</p>
+<h4 id="AppClassLoader（系统类加载器）"><a href="#AppClassLoader（系统类加载器）" class="headerlink" title="AppClassLoader（系统类加载器）"></a>AppClassLoader（系统类加载器）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java`编写，加载程序所在的目录，如`user.dir`所在的位置的`class</span><br></pre></td></tr></table></figure>
+
+<h4 id="CustomClassLoader（用户自定义类加载器）"><a href="#CustomClassLoader（用户自定义类加载器）" class="headerlink" title="CustomClassLoader（用户自定义类加载器）"></a>CustomClassLoader（用户自定义类加载器）</h4><p><code>java</code>编写,用户自定义的类加载器,可加载指定路径的<code>class</code>文件</p>
+<h4 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">            <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">            <span class="comment">// 首先检查这个classsh是否已经加载过了</span></span><br><span class="line">            Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">// c==null表示没有加载，如果有父类的加载器则让父类加载器加载</span></span><br><span class="line">                    <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                        c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//如果父类的加载器为空 则说明递归到bootStrapClassloader了</span></span><br><span class="line">                        <span class="comment">//bootStrapClassloader比较特殊无法通过get获取</span></span><br><span class="line">                        c = findBootstrapClassOrNull(name);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;&#125;</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//如果bootstrapClassLoader 仍然没有加载过，则递归回来，尝试自己去加载class</span></span><br><span class="line">                    <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                    c = findClass(name);</span><br><span class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">                resolveClass(c);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="委派机制的流程图"><a href="#委派机制的流程图" class="headerlink" title="委派机制的流程图"></a>委派机制的流程图</h3><p><img src="/typora-user-images/image-20250110001146166.png" alt="img"></p>
+<h2 id="双亲委派机制的作用"><a href="#双亲委派机制的作用" class="headerlink" title="双亲委派机制的作用"></a>双亲委派机制的作用</h2><p>1、防止重复加载同一个<code>.class</code>。通过委托去向上面问一问，加载过了，就不用再加载一遍。保证数据安全。<br> 2、保证核心<code>.class</code>不能被篡改。通过委托方式，不会去篡改核心<code>.class</code>，即使篡改也不会去加载，即使加载也不会是同一个<code>.class</code>对象了。不同的加载器加载同一个<code>.class</code>也不是同一个<code>Class</code>对象。这样保证了<code>Class</code>执行安全。</p>
+<h2 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a>沙箱安全机制</h2><p>沙箱是一个限制程序运行的环境，沙箱机制就是将java代码限定在虚拟机（JVM）特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。沙箱主要限制系统资源的访问，不同的沙箱对资源的限制也可以不一样</p>
+<p>组成沙箱的基本条件:</p>
+<p>字节码校验器：确保java文件遵循java语言规范</p>
+<p>类装载器：防止恶意代码去干涉善意代码：双亲委派机制，守护被信任的类库边界，将代码归入保护域，确定了代码可以进行那些操作，从内层JVM自带类加载器开始加载，外层恶意同名类得不到加载而无法使用，由于杨哥通过包来区分了访问域。外层恶意的类通过内置代码也无法获得权限访问到内层类，破坏代码就自然无法生效</p>
+<p>存取控制器(access controller) :存取控制器可以控制核心API对操作系统的存取权限，而这个控制的策略设定可以由用户指定。</p>
+<p>安全管理器(security manager) :是核心API和操作系统之间的主要接口。实现权限控制,比存取控制器优先级高</p>
+<p>安全软件包(security package) : java.security 下的类和扩展包下的类，允许用户为自己的应用增加新的安全特性</p>
+<h2 id="Native"><a href="#Native" class="headerlink" title="Native"></a>Native</h2><p>凡是带了native关键字的方法，说明java的作用范围达不到了，会去调用底层C语言的库！会进入本地方法栈，调用本地方法接口 JNI</p>
+<p>JNI作用：扩展Java的使用，融合不同的编程语言为java锁用！最初：C，C++</p>
+<p>Java诞生的时候 C，C++横行，想要立足，必须要又调用C，C++的程序</p>
+<p>它在内存区域中专门开辟了一块标记区域：Native Method Stack，登记native 方法</p>
+<p>在最终执行的时候，加载本地方法库中的方法通过JNI    例如java程序驱动打印机</p>
+<p>调用其他接口：Socket..Web Service<del>..http</del></p>
+<h2 id="PC寄存器"><a href="#PC寄存器" class="headerlink" title="PC寄存器"></a>PC寄存器</h2><p>程序计数器：Program Counter Register </p>
+<p>​    每个线程都有一一个程序计数器，是线程私有的，就是一个指针，指向方法区中的方法字节码(用来存储指向一条指令的地址， 也即将要执行的指令代码)，在执行引擎读取下一条指令，是一个非常小的内存空间，几乎可以忽略不计，也就是为什么线程有123456….不乱</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>Method Area 方法区</p>
+<p>​    方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数,接口代码也在此定义，简单说，所有定义的方法的信息都保存在该区域，<strong>此区域属于共享区间</strong>; </p>
+<p>​    <strong>静态变量，常量，类信息（构造方法，接口定义），运行时的常量池存在方法区中，但是实例变量存在堆内存中，和方法区无关</strong></p>
+<p>​    方法区：static final Class 常量池</p>
+<p><img src="/typora-user-images/image-20200616171420524.png" alt="image-20200616171420524"></p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>程序&#x3D;数据结构+算法</p>
+<p>栈：数据结构，先进后出，后进先出：桶</p>
+<p>队列：先进先出（FIFO: First input First Output）</p>
+<p>为什么main()方法先执行最后结束？因为main()方法总是第一个压栈执行，只要等到栈中只要一个main方法，才能出栈</p>
+<p><img src="/typora-user-images/image-20200616184617940.png" alt="image-20200616184617940"></p>
+<p>递归为什么会造成栈溢出？因为递归会一直压栈，不出栈，栈就会越来越多，抛出 StackOverflowError异常</p>
+<p>栈：栈内存，主管程序运行，生命周期和线程同步；线程结束，栈内存也就释放了，对于栈来说，<strong>不存在垃圾回收问题</strong></p>
+<p>一旦线程结束，栈就Over</p>
+<p>栈：八大基本类型+对象的引用+实例的方法</p>
+<p>栈运行原理：栈帧 </p>
+<p><img src="/typora-user-images/image-20200616185655919.png" alt="image-20200616185655919"></p>
+<p> 栈+堆+方法区：交互关系</p>
+<p>new的过程：</p>
+<p><img src="/typora-user-images/image-20200616192745399.png" alt="image-20200616192745399"></p>
+<h2 id="三种JVM"><a href="#三种JVM" class="headerlink" title="三种JVM"></a>三种JVM</h2><ul>
+<li>Sun公司 HotSpot（学的最多）</li>
+<li>BEA公司 JRockit</li>
+<li>IBM公司j9vm</li>
+</ul>
+<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>Heap，一个JVM只有一个堆内存，栈是线程级的，堆内存的大小是可以调节的</p>
+<p>类加载器读取了类文件后，一般会把什么东西放到堆中呢？类，方法，常量，变量，保存我们所有引用类型的真实对象</p>
+<p>堆内存中还要细分为三个区域：</p>
+<ul>
+<li>新生区（伊甸园区）Young&#x2F;New<ul>
+<li>类，诞生和成长的地方，甚至死亡；</li>
+<li>伊甸园，所有的对象都是在伊甸园区new出来的！</li>
+</ul>
+</li>
+<li>养老区 old</li>
+<li>永久区 Perm</li>
+</ul>
+<p><img src="/typora-user-images/image-20200617163507267.png" alt="image-20200617163507267"></p>
+<p>GC垃圾回收，主要是在伊甸园区和养老区，幸存区是用来过度的</p>
+<p>假设内存满了，OOM，堆内存不够！    java.lang.OutOfMemoryError: Java heap space</p>
+<p>在JDK8以后，永久存储区改了个名字（元空间）</p>
+<p><img src="/typora-user-images/image-20200617165111528.png" alt="image-20200617165111528"></p>
+<p>真理：经过研究，百分之99的对象都是临时对象！</p>
+<p>永久区</p>
+<p>这个区常驻内存的，用来存放一些JDK自身携带的JDK对象，Interface元数据，存储的是Java运行时的一些环境或类信息，这个区域不存在垃圾回收！关闭JVM就会释放这个区域的内存</p>
+<p>什么操作会导致永久区崩掉，一个启动类加载了大量的第三方jar包。tomcat部署了太多的应用，或者大量动态生成的反射类。不断地被加载直到内存满，就会出现OOM</p>
+<p>jdk1.6之前：永久代，常量池是在方法区</p>
+<p>jdk1.7：永久代，但是慢慢退化了<code>去永久代</code>，常量池在堆中</p>
+<p>jdk1.8：无永久代，常量池在元空间</p>
+<p> <img src="/typora-user-images/image-20200617205523133.png" alt="image-20200617205523133"></p>
+<p>元空间逻辑上存在，物理上不存在，物理上堆只有年轻代（Eden，幸存0，1）和老年代</p>
+<p>在一个项目中，突然出现了OOM故障，那么该如何排除，研究为什么出错</p>
+<ul>
+<li>能够看到代码第几行出错：内存快照分析工具，Jprofiler</li>
+<li>Debug，一行行分析</li>
+</ul>
+<p>MAT,Jprofiler 作用：</p>
+<ul>
+<li>分析Dump内存文件，快速定位内存泄漏</li>
+<li>获得堆中的数据</li>
+<li>获得大的对象</li>
+</ul>
+<p>果遇到OOM问题首先要先把堆内存调大，如果轻GC清理不过来，那么重GC清理直到年轻代，老年代，元空间都满了，就会报OOM。</p>
+<p>命令：-Xms1m -Xmx8m -XX:+PrintGCDetails&#x2F;&#x2F; 打印GC垃圾回收西信息 -XX:+HeapDumpOnOutOfMemoryError&#x2F;&#x2F; oom dump</p>
+<p>Xms1m 设置初始化内存分配大小64&#x2F;1</p>
+<p>Xmx8m 设置最大分配内存，默认4&#x2F;1</p>
+<p>GC：垃圾回收机制</p>
+<p><img src="/typora-user-images/image-20200619005410368.png" alt="image-20200619005410368"></p>
+<p>JVM 在进行GC时，并不是对这三个区域统一回收。大部分时候，回收都是新生代</p>
+<ul>
+<li>新生代</li>
+<li>幸存区（from ，to）不为0，1它既可以from变成to也可以to变成from</li>
+<li>老年区</li>
+</ul>
+<p>GC 两种类型：轻GC（普通的GC），重GC（全局GC）</p>
+<p>GC题目：</p>
+<ul>
+<li>JVM的内存模型和分区，每个区放什么</li>
+<li>堆里的分区有哪些？Eden，from，to，老年区，说说他们的特点！</li>
+<li>GC的算法有那些？标记清楚法，标记整理，复制算法，引用技术器，怎么用？</li>
+<li>轻GC和重GC分别在什么时候发生？</li>
+</ul>
+<p>引用计数法：</p>
+<p>给每个对象分配一个计数器，看引用了多少次，清除没引用的</p>
+<p><img src="/typora-user-images/image-20200619010724166.png" alt="image-20200619010724166"></p>
+<p>复制算法：假设to 和 from 都是有对象是活的的我为了保证一个是空的，把其中一个区复制到另外的那个区，把from的对象复制到to，不停的交换保证to永远是空的</p>
+<p>幸存1和幸存0谁空谁是to，1.每次GC对象都会将活的Eden对象移到幸存区中，一旦Eden区被GC后，就会是空的</p>
+<p><img src="/typora-user-images/image-20200619234226192.png" alt="image-20200619234226192"></p>
+<p><img src="/typora-user-images/image-20200619234705678.png" alt="image-20200619234705678"></p>
+<ul>
+<li>好处：没有内存碎片</li>
+<li>坏处：浪费了内存空间：多了一半空间永远是空to。假设对象%100存活（极端情况）使用复制算法很low</li>
+</ul>
+<p>复制算法使用最佳场景：对象存活度较低的时候；在新生区GC，也在新生区使用复制算法。</p>
+<p>标记清楚法：扫描对象对活着的进行标记，清楚没有标记的对象</p>
+<p><img src="/typora-user-images/image-20200619235410991.png" alt="image-20200619235410991"></p>
+<ul>
+<li>优点：不需要额外的空间！（复制算法的缺点干掉！）</li>
+<li>缺点：两次扫描严重浪费时间，会产生内存碎片。</li>
+</ul>
+<p>标记压缩：</p>
+<p>再优化，压缩：再次扫描，向一端移动存活的对象，防止内存碎片产生，但是多了一个移动成本</p>
+<p><img src="/typora-user-images/image-20200619235904444.png" alt="image-20200619235904444"></p>
+<p>标记清除压缩：</p>
+<ul>
+<li><strong>先区标记清除几次，在进行标记压缩</strong></li>
+</ul>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>内存效率：复制算法&gt;标记清除算法&gt;标记压缩算法（时间复杂度）</p>
+<p>内存整齐度：复制算法&#x3D;标记压缩算法&gt;标记清除算法</p>
+<p>内存利用率：标记压缩算法&#x3D;标记清除算法&gt;复制算法</p>
+<p>没有最好的算法，只有最合适的—–&gt;GC：分代收集算法</p>
+<p>年轻代：</p>
+<ul>
+<li>存活率低</li>
+<li>复制算法！</li>
+</ul>
+<p>老年代：</p>
+<ul>
+<li>区域大：存活率高</li>
+<li>标记清除（内存碎片不是太多）+标记压缩混合 实现</li>
+</ul>
+<h1 id="JMM-Java-Memory-Model"><a href="#JMM-Java-Memory-Model" class="headerlink" title="JMM:Java Memory Model"></a>JMM:Java Memory Model</h1><ul>
+<li>Java内存模型</li>
+<li>作用：缓存一致性协议，用于定义数据读写的规则（遵守，找到这个规则 ）。</li>
+<li>JMM定义了线程工作内存和主内存之间的抽象关系：线程之间的共享变量存储在主内存中，每个栈线程都有一个私有的本地内存（Local Memory）</li>
+</ul>
+<p><img src="/typora-user-images/image-20200624143900875.png" alt="image-20200624143900875"></p>
+<p>解决共享对象可见性这个问题：volatile 保证线程工作内存修改立马刷新到主内存中</p>
+<p>Java 内存模型定义了 8 个操作来完成主内存和工作内存的交互操作。</p>
+<p><img src="/typora-user-images/image-20250110001355358.png" alt="img"></p>
+<p>read：把一个变量的值从主内存传输到工作内存中</p>
+<p>load：在 read 之后执行，把 read 得到的值放入工作内存的变量副本中</p>
+<p>use：把工作内存中一个变量的值传递给执行引擎</p>
+<p>assign：把一个从执行引擎接收到的值赋给工作内存的变量</p>
+<p>store：把工作内存的一个变量的值传送到主内存中</p>
+<p>write：在 store 之后执行，把 store 得到的值放入主内存的变量中</p>
+<p>Mybatis生命周期</p>
+<p><img src="/typora-user-images/image-20200715225430136.png" alt="image-20200715225430136"></p>
+<p>可以通过再Mapper.xml文件中去配置cache达到优化数据库的作用，更新操作频繁不用配置，读操作频繁可以配置</p>
+<p><strong>Mybatis缓存原理</strong></p>
+<p><img src="/typora-user-images/image-20200715225534246.png" alt="image-20200715225534246"></p>
+<p><strong>spring</strong></p>
+<p>什么是IOC？</p>
+<p>原先我们要通过new去创建对象，现在我们把创建对象这一操作交给spring中的ioc容器去管理，我们想用的时候直接取出来就可以</p>
+<p>控制：传统方式是通过程序本身new去创建对象的，使用spring后，对象是由spring来创建的</p>
+<p>反转：现在程序不创建对象了，而变成被动的接收对象</p>
+<p>通过xml的ByName方式去自动装配，那么ByType则是查找和自己对象属性类型相同的bean</p>
+<p><img src="/typora-user-images/image-20200716005951990.png" alt="image-20200716005951990"></p>
+<p><img src="/typora-user-images/image-20200716001031617.png" alt="image-20200716001031617"></p>
+<p>总结：</p>
+<p>ByName的时候，需要保证所有的bean的id唯一，并且这个bean需要和自动注入的属性的set方法的值一致</p>
+<p>ByType的时候，需要保证所有的bean的class唯一，并且这个bean需要和自动注入的属性的类型一致</p>
+<p>在把bean交给IOC容器管理的时候，有两个参数一个是id一个是class</p>
+<p>我们自动装配的时候，ByName就去Person里找名字和bean的id相同的，class就找和class相同的</p>
+<p>自动装配的两个注解</p>
+<p>@Autowired</p>
+<p>@Resource</p>
+<p>把类交给spring容器管理，注册bean</p>
+<p>@Component</p>
+<p>注入值用@Value</p>
+<p>集合</p>
+<p><img src="/typora-user-images/image-20200702011138093.png" alt="image-20200702011138093"></p>
+<p>使用<code>ReadWriteLock</code>可以解决这个问题，它保证：</p>
+<ul>
+<li>只允许一个线程写入（其他线程既不能写入也不能读取）；</li>
+<li>没有写入时，多个线程允许同时读（提高性能）。</li>
+</ul>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>GOF -23 23种设计模式</p>
+<p>设计模式的本质是面向对象设计原则的实际运用，是对类的封装性，继承性和多态性以及类的关联关系和组合关系的充分理解</p>
+<p><img src="/typora-user-images/image-20200624151218689.png" alt="image-20200624151218689"></p>
+<p>面向对象七大原则（OOP）</p>
+<p><img src="/typora-user-images/image-20200624152109183.png" alt="image-20200624152109183"></p>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Copyright © 2020 <a class="flink" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>-<a class="flink" target="_blank" rel="noopener" href="https://github.com/sanjinhub/hexo-theme-geek">Geek</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="white">
+<input type="hidden" id="valine_appid" value="CmCti21ooOOIzFOhEyFkFvR0-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="FqiyUqbg7McKN2eG0MCewupf">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>

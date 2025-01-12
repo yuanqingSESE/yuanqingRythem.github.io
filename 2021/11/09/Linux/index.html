@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        蒙园青Rythem的博客
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            LINUX学习
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>centos7.7镜像下载地址：<a target="_blank" rel="noopener" href="http://isoredirect.centos.org/centos/7.7.1908/isos/x86_64/">http://isoredirect.centos.org/centos/7.7.1908/isos/x86_64/</a></li>
+<li>安装参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/dreamfreedom/p/11563236.html">https://www.cnblogs.com/dreamfreedom/p/11563236.html</a></li>
+</ul>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
+<li>Linux 英文解释为 Linux is not Unix。</li>
+<li>Linux内核最初只是由芬兰人李纳斯·托瓦兹（Linus Torvalds）在赫尔辛基大学上学时出于个人爱好而编写的。</li>
+<li>Linux的发行版说简单点就是将Linux内核与应用软件做一个打包。</li>
+<li>目前市面上较知名的发行版有：Ubuntu、RedHat、CentOS、Debian、Fedora、SuSE、OpenSUSE、Arch Linux、SolusOS 等。</li>
+</ul>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls /</span><br><span class="line">bin  dev  home  lost+found  mnt  proc  sbin     srv  tmp  var</span><br><span class="line">boot etc  lib   media       opt  root  selinux  sys  usr</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>&#x2F;bin</p>
+</li>
+<li><p>bin是Binary的缩写, 这个目录存放着最经常使用的命令。</p>
+</li>
+<li><p>&#x2F;boot</p>
+</li>
+<li><p>这里存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+</li>
+<li><p>&#x2F;dev</p>
+</li>
+<li><p>dev是Device(设备)的缩写, 该目录下存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的。</p>
+</li>
+<li><p>&#x2F;etc</p>
+</li>
+<li><p>这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
+</li>
+<li><p>&#x2F;home</p>
+</li>
+<li><p>用户的主目录，在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。</p>
+</li>
+<li><p>&#x2F;lib</p>
+</li>
+<li><p>这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件。几乎所有的应用程序都需要用到这些共享库。</p>
+</li>
+<li><p>&#x2F;lost+found</p>
+</li>
+<li><p>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+</li>
+<li><p>&#x2F;media</p>
+</li>
+<li><p>linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，linux会把识别的设备挂载到这个目录下。</p>
+</li>
+<li><p>&#x2F;mnt</p>
+</li>
+<li><p>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在&#x2F;mnt&#x2F;上，然后进入该目录就可以查看光驱里的内容了。</p>
+</li>
+<li><p>&#x2F;opt</p>
+<ul>
+<li>这是给主机额外安装软件所摆放的目录。</li>
+<li>比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</li>
+</ul>
+</li>
+<li><p>&#x2F;proc</p>
+<ul>
+<li>这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。</li>
+<li>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x2F;root</p>
+</li>
+<li><p>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+</li>
+<li><p>&#x2F;sbin</p>
+</li>
+<li><p>s就是Super User的意思，这里存放的是系统管理员使用的系统管理程序。</p>
+</li>
+<li><p>&#x2F;selinux</p>
+</li>
+<li><p>这个目录是Redhat&#x2F;CentOS所特有的目录，Selinux是一个安全机制，类似于windows的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
+</li>
+<li><p>&#x2F;srv</p>
+</li>
+<li><p>该目录存放一些服务启动之后需要提取的数据。</p>
+</li>
+<li><p>&#x2F;sys</p>
+<ul>
+<li>这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。</li>
+<li>sysfs文件系统集成了下面3种文件系统的信息：针对进程信息的proc文件系统、针对设备的devfs文件系统以及针对伪终端的devpts文件系统。</li>
+<li>该文件系统是内核设备树的一个直观反映。</li>
+<li>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</li>
+</ul>
+</li>
+<li><p>&#x2F;tmp</p>
+</li>
+<li><p>这个目录是用来存放一些临时文件的。</p>
+</li>
+<li><p>&#x2F;usr</p>
+<ul>
+<li>这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。</li>
+<li>&#x2F;usr&#x2F;bin<ul>
+<li>系统用户使用的应用程序。</li>
+</ul>
+</li>
+<li>&#x2F;usr&#x2F;sbin<ul>
+<li>超级用户使用的比较高级的管理程序和系统守护程序。</li>
+</ul>
+</li>
+<li>&#x2F;usr&#x2F;src<ul>
+<li>内核源代码默认的放置目录。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>&#x2F;var</p>
+<ul>
+<li>这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。</li>
+<li>包括各种日志文件。</li>
+</ul>
+</li>
+<li><p>这是一个非常重要的目录，系统上跑了很多程序，那么每个程序都会有相应的日志产生，而这些日志就被记录到这个目录下，具体在&#x2F;var&#x2F;log 目录下，另外mail的预设放置也是在这里。</p>
+</li>
+<li><p>&#x2F;etc</p>
+</li>
+<li><p>上边也提到了，这个是系统中的配置文件，如果你更改了该目录下的某个文件可能会导致系统不能启动。</p>
+</li>
+</ul>
+<h2 id="文件属性"><a href="#文件属性" class="headerlink" title="文件属性"></a>文件属性</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>第一个字符代表：</p>
+<ul>
+<li>当为[ d ]则是目录；</li>
+<li>当为[ - ]则是文件；</li>
+<li>若是[ l ]则表示为链接文档(link file)；</li>
+<li>若是[ b ]则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>若是[ c ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+</ul>
+</li>
+<li><p>从左至右用0-9这些数字来表示</p>
+<ul>
+<li>第0位确定文件类型</li>
+<li>第1-3位确定属主（该文件的所有者）拥有该文件的权限。</li>
+<li>第4-6位确定属组（所有者的同组用户）拥有该文件的权限</li>
+<li>第7-9位确定其他用户拥有该文件的权限。</li>
+<li>其中，第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</li>
+<li>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；</li>
+<li>第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则无执行权限。</li>
+<li>r:4</li>
+<li>w:2</li>
+<li>x:1</li>
+</ul>
+</li>
+<li><p>即：<code>chmod 777 文件名</code>可赋予所有权限</p>
+</li>
+</ul>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">mkdir (创建新目录)</span><br><span class="line">-m ：配置文件的权限喔！直接配置，不需要看默认权限 (umask) 的脸色～</span><br><span class="line">-p ：帮助你直接将所需要的目录(包含上一级目录)递归创建起来！</span><br><span class="line">例如：mkdir -m 711 -p /root/test2</span><br><span class="line"></span><br><span class="line">rmdir (删除空的目录)</span><br><span class="line">-p ：连同上一级『空的』目录也一起删除</span><br><span class="line">例如：rmdir -p test1/test2</span><br><span class="line"></span><br><span class="line">cp (复制文件或目录)</span><br><span class="line">-a：相当於 -pdr 的意思，至於 pdr 请参考下列说明；(常用)</span><br><span class="line">-d：若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</span><br><span class="line">-f：为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</span><br><span class="line">-i：若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</span><br><span class="line">-l：进行硬式连结(hard link)的连结档创建，而非复制文件本身；</span><br><span class="line">-p：连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</span><br><span class="line">-r：递归持续复制，用於目录的复制行为；(常用)</span><br><span class="line">-s：复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</span><br><span class="line">-u：若 destination 比 source 旧才升级 destination ！</span><br><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br><span class="line"></span><br><span class="line">rm (移除文件或目录)</span><br><span class="line">-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</span><br><span class="line">-i ：互动模式，在删除前会询问使用者是否动作</span><br><span class="line">-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</span><br><span class="line"></span><br><span class="line">mv (移动文件与目录，或修改名称)</span><br><span class="line">-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</span><br><span class="line">-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</span><br><span class="line">-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</span><br><span class="line">[root@www ~]# mv [-fiu] source destination</span><br><span class="line">[root@www ~]# mv [options] source1 source2 source3 .... directory</span><br><span class="line"></span><br><span class="line">Linux 文件内容查看</span><br><span class="line">cat  由第一行开始显示文件内容</span><br><span class="line">tac  从最后一行开始显示，可以看出 tac 是 cat 的倒著写！ 全文都显示</span><br><span class="line">nl   显示的时候，顺道输出行号！</span><br><span class="line">more 一页一页的显示文件内容</span><br><span class="line">less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</span><br><span class="line">head 只看头几行</span><br><span class="line">tail 只看尾巴几行</span><br><span class="line"></span><br><span class="line">cat [-AbEnTv] 文件</span><br><span class="line">-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</span><br><span class="line">-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</span><br><span class="line">-E ：将结尾的断行字节 $ 显示出来；</span><br><span class="line">-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</span><br><span class="line">-T ：将 [tab] 按键以 ^I 显示出来；</span><br><span class="line">-v ：列出一些看不出来的特殊字符</span><br><span class="line"></span><br><span class="line">nl [-bnw] 文件</span><br><span class="line">-b ：指定行号指定的方式，主要有两种：</span><br><span class="line">-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；</span><br><span class="line">-b t ：如果有空行，空的那一行不要列出行号(默认值)；</span><br><span class="line">-n ：列出行号表示的方法，主要有三种：</span><br><span class="line">-n ln ：行号在荧幕的最左方显示；</span><br><span class="line">-n rn ：行号在自己栏位的最右方显示，且不加 0 ；</span><br><span class="line">-n rz ：行号在自己栏位的最右方显示，且加 0 ；</span><br><span class="line">-w ：行号栏位的占用的位数。</span><br><span class="line"></span><br><span class="line">more</span><br><span class="line">空白键 (space)：代表向下翻一页；</span><br><span class="line">Enter ：代表向下翻『一行』；</span><br><span class="line">/字串 ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</span><br><span class="line">:f ：立刻显示出档名以及目前显示的行数；</span><br><span class="line">q ：代表立刻离开 more ，不再显示该文件内容。</span><br><span class="line">b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</span><br><span class="line"></span><br><span class="line">less</span><br><span class="line">空白键 ：向下翻动一页；</span><br><span class="line">[pagedown]：向下翻动一页；</span><br><span class="line">[pageup] ：向上翻动一页；</span><br><span class="line">/字串 ：向下搜寻『字串』的功能；</span><br><span class="line">?字串 ：向上搜寻『字串』的功能；</span><br><span class="line">n ：重复前一个搜寻 (与 / 或 ? 有关！)</span><br><span class="line">N ：反向的重复前一个搜寻 (与 / 或 ? 有关！)</span><br><span class="line">q ：离开 less 这个程序；</span><br><span class="line"></span><br><span class="line">head [-n number] 文件</span><br><span class="line">-n ：后面接数字，代表显示几行的意思</span><br><span class="line"></span><br><span class="line">tail</span><br><span class="line">-n ：后面接数字，代表显示几行的意思</span><br><span class="line">-f ：表示持续侦测后面所接的档名，要等到按下[ctrl]-c才会结束tail的侦测</span><br><span class="line"></span><br><span class="line">mkdir dir1 创建一个叫做 &#x27;dir1&#x27; 的目录&#x27; </span><br><span class="line">mkdir dir1 dir2 同时创建两个目录 </span><br><span class="line">mkdir -p /tmp/dir1/dir2 创建一个目录树 </span><br><span class="line">rm -f file1 删除一个叫做 &#x27;file1&#x27; 的文件&#x27; </span><br><span class="line">rmdir dir1 删除一个叫做 &#x27;dir1&#x27; 的目录&#x27; </span><br><span class="line">rm -rf dir1 删除一个叫做 &#x27;dir1&#x27; 的目录并同时删除其内容 </span><br><span class="line">rm -rf dir1 dir2 同时删除两个目录及它们的内容 </span><br><span class="line">mv dir1 new_dir 重命名/移动 一个目录 </span><br><span class="line">cp file1 file2 复制一个文件 </span><br><span class="line">cp dir/* . 复制一个目录下的所有文件到当前工作目录 </span><br><span class="line">cp -a /tmp/dir1 . 复制一个目录到当前工作目录 </span><br><span class="line">cp -a dir1 dir2 复制一个目录 </span><br><span class="line">ln -s file1 lnk1 创建一个指向文件或目录的软链接 </span><br><span class="line">ln file1 lnk1 创建一个指向文件或目录的物理链接 </span><br></pre></td></tr></table></figure>
+
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">一、Linux系统用户账号的管理</span><br><span class="line">1、添加新的用户账号使用useradd命令</span><br><span class="line">useradd 选项 用户名</span><br><span class="line">-c comment 指定一段注释性描述。</span><br><span class="line">-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</span><br><span class="line">-g 用户组 指定用户所属的用户组。</span><br><span class="line">-G 用户组，用户组 指定用户所属的附加组。</span><br><span class="line">-s Shell文件 指定用户的登录Shell。</span><br><span class="line">-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</span><br><span class="line">2、删除帐号</span><br><span class="line">userdel 选项 用户名</span><br><span class="line">-r，它的作用是把用户的主目录一起删除。</span><br><span class="line">3、修改帐号</span><br><span class="line">usermod 选项 用户名</span><br><span class="line">常用的选项包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，</span><br><span class="line">可以为用户指定新的资源值。</span><br><span class="line">另外，有些系统可以使用选项：-l 新用户名</span><br><span class="line">4、用户口令的管理</span><br><span class="line">passwd 选项 用户名</span><br><span class="line">-l 锁定口令，即禁用账号。</span><br><span class="line">-u 口令解锁。</span><br><span class="line">-d 使账号无口令。</span><br><span class="line">-f 强迫用户下次登录时修改口令。</span><br><span class="line">二、Linux系统用户组的管理</span><br><span class="line">1、增加一个新的用户组使用groupadd命令</span><br><span class="line">groupadd 选项 用户组</span><br><span class="line">-g GID 指定新用户组的组标识号（GID）。</span><br><span class="line">-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。</span><br><span class="line">2、如果要删除一个已有的用户组，使用groupdel命令</span><br><span class="line">groupdel 用户组</span><br><span class="line">3、修改用户组的属性使用groupmod命令</span><br><span class="line">groupmod 选项 用户组</span><br><span class="line">-g GID 为用户组指定新的组标识号。</span><br><span class="line">-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</span><br><span class="line">-n新用户组 将用户组的名字改为新名字</span><br><span class="line">4、如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">newgrp root</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Linux磁盘管理好坏直接关系到整个系统的性能问题。</span><br><span class="line">Linux磁盘管理常用三个命令为df、du和fdisk。</span><br><span class="line">df：列出文件系统的整体磁盘使用量</span><br><span class="line">du：检查磁盘空间使用量</span><br><span class="line">fdisk：用于磁盘分区</span><br><span class="line"></span><br><span class="line">df</span><br><span class="line">df命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，</span><br><span class="line">目前还剩下多少空间等信息。</span><br><span class="line">语法：</span><br><span class="line">df [-ahikHTm] [目录或文件名]</span><br><span class="line">选项与参数：</span><br><span class="line">-a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；</span><br><span class="line">-k ：以 KBytes 的容量显示各文件系统；</span><br><span class="line">-m ：以 MBytes 的容量显示各文件系统；</span><br><span class="line">-h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</span><br><span class="line">-H ：以 M=1000K 取代 M=1024K 的进位方式；</span><br><span class="line">-T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；</span><br><span class="line">-i ：不用硬盘容量，而以 inode 的数量来显示</span><br><span class="line"></span><br><span class="line">du</span><br><span class="line">Linux du命令是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间</span><br><span class="line">的查看，还是和df命令有一些区别的，这里介绍Linux du命令。</span><br><span class="line">语法：</span><br><span class="line">du [-ahskm] 文件或目录名称</span><br><span class="line">选项与参数：</span><br><span class="line">-a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。</span><br><span class="line">-h ：以人们较易读的容量格式 (G/M) 显示；</span><br><span class="line">-s ：列出总量而已，而不列出每个各别的目录占用容量；</span><br><span class="line">-S ：不包括子目录下的总计，与 -s 有点差别。</span><br><span class="line">-k ：以 KBytes 列出容量显示；</span><br><span class="line">-m ：以 MBytes 列出容量显示；</span><br><span class="line"></span><br><span class="line">fdisk</span><br><span class="line">fdisk 是 Linux 的磁盘分区表操作工具。</span><br><span class="line">语法：</span><br><span class="line">fdisk [-l] 装置名称</span><br><span class="line">选项与参数：</span><br><span class="line">-l ：输出后面接的装置所有的分区内容。若仅有 fdisk -l 时，</span><br><span class="line">则系统将会把整个系统内能够搜寻到的装置的分区均列出来。</span><br></pre></td></tr></table></figure>
+
+<h2 id="vi-vim使用"><a href="#vi-vim使用" class="headerlink" title="vi&#x2F;vim使用"></a>vi&#x2F;vim使用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">基本上 vi/vim 共分为三种模式，分别是命令模式（Command mode），输入模式（Insert mode）</span><br><span class="line">和底线命令模式（Last line mode）。 这三种模式的作用分别是：</span><br><span class="line">命令模式：</span><br><span class="line">用户刚刚启动 vi/vim，便进入了命令模式。</span><br><span class="line">此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，</span><br><span class="line">i被当作了一个命令。</span><br><span class="line">以下是常用的几个命令：</span><br><span class="line">i 切换到输入模式，以输入字符。</span><br><span class="line">x 删除当前光标所在处的字符。</span><br><span class="line">: 切换到底线命令模式，以在最底一行输入命令。</span><br><span class="line">若想要编辑文本：启动Vim，进入了命令模式，按下i，切换到输入模式。</span><br><span class="line">命令模式只有一些最基本的命令，因此仍要依靠底线命令模式输入更多命令。</span><br><span class="line">输入模式：</span><br><span class="line">在命令模式下按下i就进入了输入模式。</span><br><span class="line">在输入模式中，可以使用以下按键：</span><br><span class="line">字符按键以及Shift组合，输入字符</span><br><span class="line">ENTER，回车键，换行</span><br><span class="line">BACK SPACE，退格键，删除光标前一个字符</span><br><span class="line">DEL，删除键，删除光标后一个字符</span><br><span class="line">方向键，在文本中移动光标</span><br><span class="line">HOME/END，移动光标到行首/行尾</span><br><span class="line">Page Up/Page Down，上/下翻页</span><br><span class="line">Insert，切换光标为输入/替换模式，光标将变成竖线/下划线</span><br><span class="line">ESC，退出输入模式，切换到命令模式</span><br><span class="line">底线命令模式：</span><br><span class="line">在命令模式下按下:（英文冒号）就进入了底线命令模式。</span><br><span class="line">底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。</span><br><span class="line">在底线命令模式中，基本的命令有（已经省略了冒号）：</span><br><span class="line">q 退出程序</span><br><span class="line">w 保存文件</span><br><span class="line">按ESC键可随时退出底线命令模式。</span><br></pre></td></tr></table></figure>
+
+<h2 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">yum（ Yellow dog Updater, Modified，CentOS中的大黄狗）</span><br><span class="line">是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器。</span><br><span class="line">基於RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，</span><br><span class="line">并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。</span><br><span class="line">yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</span><br><span class="line">yum 语法</span><br><span class="line">yum [options] [command] [package ...]</span><br><span class="line">options：可选，选项包括-h（帮助），-y（当安装过程提示选择全部为&quot;yes&quot;），</span><br><span class="line">-q（不显示安装的过程）等等。</span><br><span class="line">command：要进行的操作。</span><br><span class="line">package操作的对象。</span><br><span class="line">yum常用命令</span><br><span class="line">1.列出所有可更新的软件清单命令：yum check-update</span><br><span class="line">2.更新所有软件命令：yum update</span><br><span class="line">3.仅安装指定的软件命令：yum install &lt;package_name&gt;</span><br><span class="line">4.仅更新指定的软件命令：yum update &lt;package_name&gt;</span><br><span class="line">5.列出所有可安裝的软件清单命令：yum list</span><br><span class="line">6.删除软件包命令：yum remove &lt;package_name&gt;</span><br><span class="line">7.查找软件包 命令：yum search &lt;keyword&gt;</span><br><span class="line">8.清除缓存命令:</span><br><span class="line">yum clean packages: 清除缓存目录下的软件包</span><br><span class="line">yum clean headers: 清除缓存目录下的 headers</span><br><span class="line">yum clean oldheaders: 清除缓存目录下旧的 headers</span><br><span class="line">yum clean, yum clean all (= yum clean packages; yum clean oldheaders) :</span><br><span class="line">清除缓存目录下的软件包及旧的headers</span><br></pre></td></tr></table></figure>
+
+<h2 id="bc命令"><a href="#bc命令" class="headerlink" title="bc命令"></a>bc命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">bc 命令是任意精度计算器语言，通常在linux下当计算器用。</span><br><span class="line">它类似基本的计算器, 使用这个计算器可以做基本的数学运算。</span><br><span class="line">常用的运算：</span><br><span class="line">+ 加法</span><br><span class="line">- 减法</span><br><span class="line">* 乘法</span><br><span class="line">/ 除法</span><br><span class="line">^ 指数</span><br><span class="line"><span class="meta prompt_">% </span><span class="language-bash">余数</span></span><br><span class="line">语法</span><br><span class="line">bc(选项)(参数)</span><br><span class="line">选项值</span><br><span class="line">-i：强制进入交互式模式；</span><br><span class="line">-l：定义使用的标准数学库</span><br><span class="line">-w：对POSIX bc的扩展给出警告信息；</span><br><span class="line">-q：不打印正常的GNU bc环境信息；</span><br><span class="line">-v：显示指令版本信息；</span><br><span class="line">-h：显示指令的帮助信息。</span><br><span class="line">参数</span><br><span class="line">文件：指定包含计算任务的文件。</span><br><span class="line"></span><br><span class="line">通过管道符</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;15+5&quot;</span> | bc</span></span><br><span class="line">20</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bc</span></span><br><span class="line">2+3</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h2 id="和-和"><a href="#和-和" class="headerlink" title="&amp;和&amp;&amp;,|和||"></a>&amp;和&amp;&amp;,|和||</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&amp;  表示任务在后台执行，如要在后台运行redis-server,则有  redis-server &amp;</span><br><span class="line">&amp;&amp; 表示前一条命令执行成功时，才执行后一条命令 ，如 echo &#x27;1‘ &amp;&amp; echo &#x27;2&#x27;    </span><br><span class="line">| 表示管道，上一条命令的输出，作为下一条命令参数，如 echo &#x27;yes&#x27; | wc -l</span><br><span class="line">|| 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo &quot;fail&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。</span><br><span class="line">下面的参数是根据需要在压缩或解压档案时可选的。</span><br><span class="line"></span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br><span class="line">下面的参数-f是必须的</span><br><span class="line">-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar -cf all.tar *.jpg</span></span><br><span class="line">这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar -rf all.tar *.gif</span></span><br><span class="line">这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar -uf all.tar logo.gif</span></span><br><span class="line">这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar -tf all.tar</span></span><br><span class="line">这条命令是列出all.tar包中所有文件，-t是列出文件的意思</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">tar -xf all.tar</span></span><br><span class="line">这条命令是解出all.tar包中所有文件，-t是解开的意思</span><br><span class="line">压缩</span><br><span class="line">tar -cvf jpg.tar *.jpg        //将目录里所有jpg文件打包成tar.jpg </span><br><span class="line">tar -czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，</span><br><span class="line">                                生成一个gzip压缩过的包，命名为jpg.tar.gz</span><br><span class="line">tar -cjf jpg.tar.bz2 *.jpg    //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，</span><br><span class="line">                                生成一个bzip2压缩过的包，命名为jpg.tar.bz2</span><br><span class="line">tar -cZf jpg.tar.Z *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，</span><br><span class="line">                                生成一个umcompress压缩过的包，命名为jpg.tar.Z</span><br><span class="line">rar a jpg.rar *.jpg           //rar格式的压缩，需要先下载rar for linux</span><br><span class="line">zip jpg.zip *.jpg             //zip格式的压缩，需要先下载zip for linux</span><br><span class="line">解压</span><br><span class="line">tar -xvf file.tar //解压 tar包</span><br><span class="line">tar -xzvf file.tar.gz //解压tar.gz</span><br><span class="line">tar -xjvf file.tar.bz2   //解压 tar.bz2</span><br><span class="line">tar -xZvf file.tar.Z   //解压tar.Z</span><br><span class="line">unrar e file.rar //解压rar</span><br><span class="line">unzip file.zip //解压zip</span><br><span class="line">总结</span><br><span class="line">1、*.tar 用 tar -xvf 解压</span><br><span class="line">2、*.gz 用 gzip -d或者gunzip 解压</span><br><span class="line">3、*.tar.gz和*.tgz 用 tar -xzf 解压</span><br><span class="line">4、*.bz2 用 bzip2 -d或者用bunzip2 解压</span><br><span class="line">5、*.tar.bz2用tar -xjf 解压</span><br><span class="line">6、*.Z 用 uncompress 解压</span><br><span class="line">7、*.tar.Z 用tar -xZf 解压</span><br><span class="line">8、*.rar 用 unrar e解压</span><br><span class="line">9、*.zip 用 unzip 解压</span><br><span class="line"></span><br><span class="line">解压jdk到指定文件夹：</span><br><span class="line">tar -xzvf jdk-8u131-linux-x64.tar.gz -C /usr/local/java</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Copyright © 2020 <a class="flink" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>-<a class="flink" target="_blank" rel="noopener" href="https://github.com/sanjinhub/hexo-theme-geek">Geek</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="white">
+<input type="hidden" id="valine_appid" value="CmCti21ooOOIzFOhEyFkFvR0-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="FqiyUqbg7McKN2eG0MCewupf">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
