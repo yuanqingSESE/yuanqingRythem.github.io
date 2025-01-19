@@ -297,11 +297,11 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SelectionKeyImpl</span> <span class="keyword">extends</span> <span class="title class_">AbstractSelectionKey</span> &#123;</span><br><span class="line">    <span class="comment">// Key对应的通道</span></span><br><span class="line">    <span class="keyword">final</span> SelChImpl channel;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p><img src="/.com//%5Ctypora-user-images%5C20210414192429.png" alt="20210414192429"></p>
+<p><img src="/typora-user-images/20210414192429.png" alt="20210414192429"></p>
 <ul>
 <li>当<strong>选择器中的通道对应的事件发生后</strong>，selecionKey会被放到发生事件集合中，这个集合只能添加不能删除，所有事件集合的<strong>selecionKey不会自动移除</strong>，所以需要我们在处理完一个事件后，通过迭代器手动移除其中的selecionKey。否则会导致已被处理过的事件再次被处理，就会引发错误。</li>
 </ul>
-<p><img src="/.com//%5Ctypora-user-images%5C20210414193143.png"></p>
+<p><img src="/typora-user-images/20210414193143.png"></p>
 <h3 id="断开处理"><a href="#断开处理" class="headerlink" title="断开处理"></a>断开处理</h3><p>当客户端与服务器之间的连接<strong>断开时，会给服务器端发送一个读事件</strong>，对异常断开和正常断开需要加以不同的方式进行处理</p>
 <ul>
 <li><p><strong>正常断开</strong></p>
@@ -385,13 +385,13 @@
 <li>等待数据阶段</li>
 <li>复制数据阶段</li>
 </ul>
-<p><img src="/.com//%5Ctypora-user-images%5Cimage-20220830211928009.png" alt="image-20220830211928009"></p>
+<p><img src="/typora-user-images/image-20220830211928009.png" alt="image-20220830211928009"></p>
 <p>IO模型主要分为以下几种：</p>
-<h3 id="阻塞IO："><a href="#阻塞IO：" class="headerlink" title="阻塞IO："></a>阻塞IO：</h3><p><img src="/.com//%5Ctypora-user-images%5Cimage-20220830212113223.png" alt="image-20220830212113223"></p>
+<h3 id="阻塞IO："><a href="#阻塞IO：" class="headerlink" title="阻塞IO："></a>阻塞IO：</h3><p><img src="/typora-user-images/image-20220830212113223.png" alt="image-20220830212113223"></p>
 <ul>
 <li>用户线程进行read操作时，<strong>需要等待操作系统执行实际的read操作</strong>，此期间用户线程是被阻塞的，无法执行其他操作</li>
 </ul>
-<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><p><img src="/.com//%5Ctypora-user-images%5Cimage-20220830215641725.png" alt="image-20220830215641725"></p>
+<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><p><img src="/typora-user-images/image-20220830215641725.png" alt="image-20220830215641725"></p>
 <ul>
 <li>用户线程在一个循环中一直调用read方法，若内核空间中还没有数据可读，立即返回<ul>
 <li><strong>只是在等待阶段非阻塞</strong></li>
@@ -399,7 +399,7 @@
 </li>
 <li>用户线程发现内核空间中有数据后，等待内核空间执行复制数据，待复制结束后返回结果，这个过程是被阻塞的。</li>
 </ul>
-<h3 id="多路复用-1"><a href="#多路复用-1" class="headerlink" title="多路复用"></a>多路复用</h3><p><img src="/.com//%5Ctypora-user-images%5Cimage-20220830215701759.png" alt="image-20220830215701759"></p>
+<h3 id="多路复用-1"><a href="#多路复用-1" class="headerlink" title="多路复用"></a>多路复用</h3><p><img src="/typora-user-images/image-20220830215701759.png" alt="image-20220830215701759"></p>
 <p><strong>Java中通过Selector实现多路复用</strong></p>
 <ul>
 <li>当没有事件时，调用select方法会被阻塞住</li>
@@ -410,7 +410,7 @@
 <li>阻塞IO模式下，<strong>若线程因accept事件被阻塞，发生read事件后，仍需等待accept事件执行完成后</strong>，才能去处理read事件</li>
 <li>多路复用模式下，一个事件发生后，若另一个事件处于阻塞状态，不会影响该事件的执行</li>
 </ul>
-<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><p><img src="/.com//%5Ctypora-user-images%5Cimage-20220830220725875.png" alt="image-20220830220725875"></p>
+<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><p><img src="/typora-user-images/image-20220830220725875.png" alt="image-20220830220725875"></p>
 <ul>
 <li>线程1调用方法后理解返回，<strong>不会被阻塞也不需要立即获取结果</strong></li>
 <li>当方法的运行结果出来以后，由线程2将结果<strong>回调</strong>给线程1</li>
@@ -426,7 +426,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">File f = new File(&quot;helloword/data.txt&quot;);</span><br><span class="line">RandomAccessFile file = new RandomAccessFile(file, &quot;r&quot;);</span><br><span class="line"></span><br><span class="line">byte[] buf = new byte[(int)f.length()];</span><br><span class="line">file.read(buf);</span><br><span class="line"></span><br><span class="line">Socket socket = ...;</span><br><span class="line">socket.getOutputStream().write(buf);Copy</span><br></pre></td></tr></table></figure>
 
 <p><strong>内部工作流如下</strong></p>
-<p><img src="/.com//%5Ctypora-user-images%5Cimage-20220831222326741.png" alt="image-20220831222326741"></p>
+<p><img src="/typora-user-images/image-20220831222326741.png" alt="image-20220831222326741"></p>
 <ul>
 <li>Java 本身并不具备 IO 读写能力，因此 read 方法调用后，要从 Java 程序的<strong>用户态切换至内核态</strong>，去调用操作系统（Kernel）的读能力，将数据读入<strong>内核缓冲区</strong>。这期间用户线程阻塞，操作系统使用 DMA（Direct Memory Access）来实现文件读，其间也不会使用 CPU</li>
 </ul>
@@ -457,7 +457,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/.com//%5Ctypora-user-images%5Cimage-20220831223736625.png" alt="image-20220831223736625"></p>
+<p><img src="/typora-user-images/image-20220831223736625.png" alt="image-20220831223736625"></p>
 <p>大部分步骤与优化前相同，唯有一点：<strong>Java 可以使用 DirectByteBuffer 将堆外内存映射到 JVM 内存中来直接访问使用</strong></p>
 <ul>
 <li>这块内存不受 JVM 垃圾回收的影响，因此内存地址固定，有助于 IO 读写</li>
@@ -474,7 +474,7 @@
 </ul>
 <h3 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h3><p><strong>以下两种方式都是零拷贝</strong>，即无需将数据拷贝到用户缓冲区中（JVM内存中）</p>
 <p>底层采用了 <strong>linux 2.1</strong> 后提供的 <strong>sendFile</strong> 方法，Java 中对应着两个 channel 调用 <strong>transferTo&#x2F;transferFrom</strong> 方法拷贝数据</p>
-<p><img src="/.com//%5Ctypora-user-images%5Cimage-20220831224536869.png" alt="image-20220831224536869"></p>
+<p><img src="/typora-user-images/image-20220831224536869.png" alt="image-20220831224536869"></p>
 <ul>
 <li>Java 调用 transferTo 方法后，要从 Java 程序的<strong>用户态</strong>切换至<strong>内核态</strong>，使用 DMA将数据读入<strong>内核缓冲区</strong>，不会使用 CPU</li>
 <li>数据从<strong>内核缓冲区</strong>传输到 <strong>socket 缓冲区</strong>，CPU 会参与拷贝</li>
@@ -486,7 +486,7 @@
 <li>数据拷贝了 3 次</li>
 </ul>
 <h3 id="进一步优化-1"><a href="#进一步优化-1" class="headerlink" title="进一步优化"></a>进一步优化</h3><p><strong>linux 2.4</strong> 对上述方法再次进行了优化</p>
-<p><img src="/.com//%5Ctypora-user-images%5Cimage-20220831225349512.png" alt="image-20220831225349512"></p>
+<p><img src="/typora-user-images/image-20220831225349512.png" alt="image-20220831225349512"></p>
 <ul>
 <li><p>Java 调用 transferTo 方法后，要从 Java 程序的<strong>用户态</strong>切换至<strong>内核态</strong>，使用 DMA将数据读入<strong>内核缓冲区</strong>，不会使用 CPU</p>
 </li>
@@ -546,7 +546,7 @@
 <ul>
 <li>流程分析（左Client端右服务器端）：</li>
 </ul>
-<p><img src="/.com//%5Ctypora-user-images%5Cimage-20220904164624414.png" alt="image-20220904164624414"></p>
+<p><img src="/typora-user-images/image-20220904164624414.png" alt="image-20220904164624414"></p>
 <h2 id="组件解释："><a href="#组件解释：" class="headerlink" title="组件解释："></a>组件解释：</h2><ul>
 <li><p>channel 可以理解为数据的通道</p>
 </li>
@@ -611,7 +611,7 @@
 <p>启动四个客户端发送数据</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nioEventLoopGroup-<span class="number">4</span>-<span class="number">1</span> hello1</span><br><span class="line">defaultEventLoopGroup-<span class="number">2</span>-<span class="number">1</span> hello1</span><br><span class="line">nioEventLoopGroup-<span class="number">4</span>-<span class="number">2</span> hello2</span><br><span class="line">defaultEventLoopGroup-<span class="number">2</span>-<span class="number">2</span> hello2</span><br><span class="line">nioEventLoopGroup-<span class="number">4</span>-<span class="number">1</span> hello3</span><br><span class="line">defaultEventLoopGroup-<span class="number">2</span>-<span class="number">3</span> hello3</span><br><span class="line">nioEventLoopGroup-<span class="number">4</span>-<span class="number">2</span> hello4</span><br><span class="line">defaultEventLoopGroup-<span class="number">2</span>-<span class="number">4</span> hello4</span><br></pre></td></tr></table></figure>
 
-<p>关系如下：<br><img src="/.com//%5Ctypora-user-images%5Cimage-20220911174307196.png" alt="image-20220911174307196"></p>
+<p>关系如下：<br><img src="/typora-user-images/image-20220911174307196.png" alt="image-20220911174307196"></p>
 <p>ctx.fireChannelRead(msg);&#x2F;&#x2F; 让消息传给下一个Handler 源码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">invokeChannelRead</span><span class="params">(<span class="keyword">final</span> AbstractChannelHandlerContext next, Object msg)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">m</span> <span class="operator">=</span> next.pipeline.touch(ObjectUtil.checkNotNull(msg, <span class="string">&quot;msg&quot;</span>), next);</span><br><span class="line">    <span class="type">EventExecutor</span> <span class="variable">executor</span> <span class="operator">=</span> next.executor();<span class="comment">// 返回下一个Handler的EventLoop</span></span><br><span class="line">    <span class="comment">// 当前Handler中的线程，是否和EventLoop是同一个线程</span></span><br><span class="line">    <span class="keyword">if</span> (executor.inEventLoop()) &#123;</span><br><span class="line">        <span class="comment">// 是则直接调用</span></span><br><span class="line">        next.invokeChannelRead(m);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//  不是，将要执行的代码作为任务提交给下一个事件循环处理（换人）</span></span><br><span class="line">        executor.execute(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                next.invokeChannelRead(m);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
