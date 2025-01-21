@@ -172,10 +172,10 @@
 <p>主线程的消息循环开始了以后，ActivityThread还需要一个Handler来和消息队列进行交互，这个Handler就是ActivityThread.H，它内部定义了一组消息类型，主要包含了四大组件的启动和停止等过程。</p>
 <p>ActivityThread通过ApplicationThread和AMS进行进程间通信，AMS以进程间通信的方方式完成ActivityThread的请求后会回调ApplicationThread中的Binder方法，然后ApplicationThread会向H发送消息，H收到消息后会将ApplicationThread中的逻辑切换到ActivityThread中去执行，即切换到主线程中去执行，这个过程就是主线程的消息循环模型。</p>
 <h3 id="Handler基本结构已经了解完毕那么一定会有如下三个问题"><a href="#Handler基本结构已经了解完毕那么一定会有如下三个问题" class="headerlink" title="Handler基本结构已经了解完毕那么一定会有如下三个问题"></a>Handler基本结构已经了解完毕那么一定会有如下三个问题</h3><p>1.Android中为什么主线程不会因为Looper.loop()里的死循环卡死？ </p>
-<p>这里涉及线程，先说说说进程&#x2F;线程，**进程：**每个app运行时前首先创建一个进程，该进程是由Zygote fork出来的，用于承载App上运行的各种Activity&#x2F;Service等组件。进程对于上层应用来说是完全透明的，这也是google有意为之，让App程序都是运行在Android Runtime。大多数情况一个App就运行在一个进程中，除非在AndroidManifest.xml中配置Android:process属性，或通过native代码fork进程。</p>
-<p><strong>线程：<strong>线程对应用来说非常常见，比如每次new Thread().start都会创建一个新的线程。该线程与App所在进程之间资源共享，从Linux角度来说进程与线程除了是否共享资源外，并没有本质的区别，都是一个task_struct结构体</strong>，在CPU看来进程或线程无非就是一段可执行的代码，CPU采用CFS调度算法，保证每个task都尽可能公平的享有CPU时间片</strong>。</p>
-<p>有了这么准备，再说说死循环问题：</p>
-<p>对于线程既然是一段可执行的代码，当可执行代码执行完成后，线程生命周期便该终止了，线程退出。而对于主线程，我们是绝不希望会被运行一段时间，自己就退出，那么如何保证能一直存活呢？**简单做法就是可执行代码是能一直执行下去的，死循环便能保证不会被退出，**例如，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=31574662&content_type=Answer&match_order=1&q=binder%E7%BA%BF%E7%A8%8B&zhida_source=entity">binder线程</a>也是采用死循环的方法，通过循环方式不同与Binder驱动进行读写操作，当然并非简单地死循环，无消息时会休眠。但这里可能又引发了另一个问题，既然是死循环又如何去处理其他事务呢？通过创建新线程的方式。</p>
+<p>这里涉及线程，先说说说进程&#x2F;线程，<strong>进程</strong>：每个app运行时前首先创建一个进程，该进程是由Zygote fork出来的，用于承载App上运行的各种Activity&#x2F;Service等组件。进程对于上层应用来说是完全透明的，这也是google有意为之，让App程序都是运行在Android Runtime。大多数情况一个App就运行在一个进程中，除非在AndroidManifest.xml中配置Android:process属性，或通过native代码fork进程。</p>
+<p><strong>线程</strong>： 线程对应用来说非常常见，比如每次new Thread().start都会创建一个新的线程。该线程与App所在进程之间资源共享，从Linux角度来说进程与线程除了是否共享资源外，并没有本质的区别，都是一个task_struct结构体，<strong>在CPU看来进程或线程无非就是一段可执行的代码，CPU采用CFS调度算法，保证每个task都尽可能公平的享有CPU时间片</strong>。</p>
+<p>有了这么准备，再说说死循环问题:</p>
+<p>对于线程既然是一段可执行的代码，当可执行代码执行完成后，线程生命周期便该终止了，线程退出。而对于主线程，我们是绝不希望会被运行一段时间，自己就退出，那么如何保证能一直存活呢？<strong>简单做法就是可执行代码是能一直执行下去的，死循环便能保证不会被退出</strong>，例如，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=31574662&content_type=Answer&match_order=1&q=binder%E7%BA%BF%E7%A8%8B&zhida_source=entity">binder线程</a>也是采用死循环的方法，通过循环方式不同与Binder驱动进行读写操作，当然并非简单地死循环，无消息时会休眠。但这里可能又引发了另一个问题，既然是死循环又如何去处理其他事务呢？通过创建新线程的方式。</p>
 <p>真正会卡死主线程的操作是在回调方法onCreate&#x2F;onStart&#x2F;onResume等操作时间过长，会导致掉帧，甚至发生ANR，looper.loop本身不会导致应用卡死。</p>
 <p>2.没看见哪里有相关代码为这个死循环准备了一个新线程去运转？ </p>
 <p>事实上，会在进入死循环之前便创建了新binder线程，在代码ActivityThread.main()中：</p>
@@ -183,21 +183,21 @@
 
 <p><strong>thread.attach(false)；便会创建一个Binder线程（具体是指ApplicationThread，Binder的服务端，用于接收系统服务AMS发送来的事件），该binder线程通过Handler将Message发送给主线程</strong>，例如看下结尾的Android系统个人总结</p>
 <p>另外，<strong>ActivityThread实际上并非线程</strong>，不像HandlerThread类，ActivityThread并没有真正继承Thread类，只是往往运行在主线程，该人以线程的感觉，其实承载ActivityThread的主线程就是由Zygote fork而创建的进程。</p>
-<p><strong>主线程的死循环一直运行是不是特别消耗CPU资源呢？</strong> 其实不然，这里就涉及到<strong>Linux pipe&#x2F;epoll机制</strong>，简单说就是在主线程的MessageQueue没有消息时，便阻塞在loop的queue.next()中的nativePollOnce()方法里，此时主线程会释放CPU资源进入休眠状态，直到下个消息到达或者有事务发生，通过往pipe管道写端写入数据来唤醒主线程工作。这里采用的epoll机制，是一种IO多路复用机制，可以同时监控多个描述符，当某个描述符就绪(读或写就绪)，则立刻通知相应程序进行读或写操作，本质同步I&#x2F;O，即读写是阻塞的。 <strong>所以说，主线程大多数时候都是处于休眠状态，并不会消耗大量CPU资源。</strong></p>
+<p><strong>主线程的死循环一直运行是不是特别消耗CPU资源呢？</strong> 其实不然，这里就涉及到<strong>Linux pipe&#x2F;epoll机制</strong>，简单说就是在主线程的MessageQueue没有消息时，便阻塞在loop的queue.next()中的nativePollOnce()方法里，此时主线程会释放CPU资源进入休眠状态，直到下个消息到达或者有事务发生，通过往pipe管道写端写入数据来唤醒主线程工作。这里采用的epoll机制，是一种IO多路复用机制，可以同时监控多个描述符，当某个描述符就绪(读或写就绪)，则立刻通知相应程序进行读或写操作，本质同步I&#x2F;O，即读写是阻塞的。 <strong>所以说，主线程大多数时候都是处于休眠状态，并不会消耗大量CPU资源</strong>。</p>
 <p> “一般的死循环会让程序卡死，比如 while(true) 打印hello，打印到天荒地老” 这不就卡死了吗。</p>
 <p>另外 没有这个 唤醒机制 那主线程不就成了一次性的了？</p>
 <p>3.Activity的生命周期这些方法这些都是在主线程里执行的吧，那这些生命周期方法是怎么实现在死循环体外能够执行起来的？</p>
 <p>ActivityThread的内部类H继承于Handler，通过handler消息机制，简单说Handler机制用于同一个进程的线程间通信。</p>
-<p><strong>Activity的生命周期都是依靠主线程的Looper.loop，当收到不同Message时则采用相应措施：</strong></p>
+<p><strong>Activity的生命周期都是依靠主线程的Looper.loop，当收到不同Message时则采用相应措施</strong>：</p>
 <p>在H.handleMessage(msg)方法中，根据接收到不同的msg，执行相应的生命周期。</p>
 <p>比如收到msg&#x3D;H.LAUNCH_ACTIVITY，则调用ActivityThread.handleLaunchActivity()方法，最终会通过<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=31574662&content_type=Answer&match_order=1&q=%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6&zhida_source=entity">反射机制</a>，创建Activity实例，然后再执行Activity.onCreate()等方法；</p>
 <p>再比如收到msg&#x3D;H.PAUSE_ACTIVITY，则调用ActivityThread.handlePauseActivity()方法，最终会执行Activity.onPause()等方法。 上述过程，只说核心逻辑讲，真正该过程远比这复杂。</p>
-<p>**主线程的消息又是哪来的呢？**当然是App进程中的其他线程通过Handler发送给主线程，请看接下来的内容：</p>
+<p><strong>主线程的消息又是哪来的呢</strong>？当然是App进程中的其他线程通过Handler发送给主线程，请看接下来的内容：</p>
 <p><img src="/typora-user-images/7fb8728164975ac86a2b0b886de2b872_r.jpg"></p>
 <p><strong><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=31574662&content_type=Answer&match_order=1&q=system_server%E8%BF%9B%E7%A8%8B&zhida_source=entity">system_server进程</a>是系统进程</strong>，java framework框架的核心载体，里面运行了大量的系统服务，比如这里提供ApplicationThreadProxy（简称ATP），ActivityManagerService（简称AMS），这个两个服务都运行在system_server进程的不同线程中，由于ATP和AMS都是基于IBinder接口，都是binder线程，binder线程的创建与销毁都是由binder驱动来决定的。</p>
 <p><strong>App进程则是我们常说的应用程序</strong>，主线程主要负责Activity&#x2F;Service等组件的生命周期以及UI相关操作都运行在这个线程； 另外，每个App进程中至少会有两个binder线程 ApplicationThread(简称AT)和ActivityManagerProxy（简称AMP），除了图中画的线程，其中还有很多线程，比如signal catcher线程等，这里就不一一列举。</p>
 <p>Binder用于不同进程之间通信，由一个进程的Binder客户端向另一个进程的服务端发送事务，比如图中线程2向线程4发送事务；而handler用于同一个进程中不同线程的通信，比如图中线程4向主线程发送消息。</p>
-<p><strong>结合图说说Activity生命周期，比如暂停Activity，流程如下：</strong></p>
+<p><strong>结合图说说Activity生命周期，比如暂停Activity，流程如下</strong>：</p>
 <ol>
 <li>线程1的AMS中调用线程2的ATP；（由于同一个进程的线程间资源共享，可以相互直接调用，但需要注意多线程并发问题）</li>
 <li>线程2通过binder传输到App进程的线程4；</li>
@@ -528,10 +528,10 @@
 </ol>
 <p>在整个startService过程，从进程角度看服务启动过程</p>
 <ul>
-<li>**Process A进程：**是指调用startService命令所在的进程，也就是启动服务的发起端进程，比如点击桌面App图标，此处Process A便是Launcher所在进程。</li>
-<li>**system_server进程：**系统进程，是java framework框架的核心载体，里面运行了大量的系统服务，比如这里提供ApplicationThreadProxy（简称ATP），ActivityManagerService（简称AMS），这个两个服务都运行在system_server进程的不同线程中，由于ATP和AMS都是基于IBinder接口，都是binder线程，binder线程的创建与销毁都是由binder驱动来决定的，每个进程binder线程个数的上限为16。</li>
-<li>**Zygote进程：**是由<code>init</code>进程孵化而来的，用于创建Java层进程的母体，所有的Java层进程都是由Zygote进程孵化而来；</li>
-<li>**Remote Service进程：**远程服务所在进程，是由Zygote进程孵化而来的用于运行Remote服务的进程。主线程主要负责Activity&#x2F;Service等组件的生命周期以及UI相关操作都运行在这个线程； 另外，每个App进程中至少会有两个binder线程 ApplicationThread(简称AT)和ActivityManagerProxy（简称AMP），当然还有其他线程，这里不是重点就不提了。</li>
+<li><strong>Process A进程</strong>：是指调用startService命令所在的进程，也就是启动服务的发起端进程，比如点击桌面App图标，此处Process A便是Launcher所在进程。</li>
+<li><strong>system_server进程</strong>：系统进程，是java framework框架的核心载体，里面运行了大量的系统服务，比如这里提供ApplicationThreadProxy（简称ATP），ActivityManagerService（简称AMS），这个两个服务都运行在system_server进程的不同线程中，由于ATP和AMS都是基于IBinder接口，都是binder线程，binder线程的创建与销毁都是由binder驱动来决定的，每个进程binder线程个数的上限为16。</li>
+<li><strong>Zygote进程</strong>：是由<code>init</code>进程遍历.rc文件拉起来的，用于创建Java层进程的母体，所有的Java层进程都是由Zygote进程孵化而来；</li>
+<li><strong>Remote Service进程</strong>：远程服务所在进程，是由Zygote进程孵化而来的用于运行Remote服务的进程。主线程主要负责Activity&#x2F;Service等组件的生命周期以及UI相关操作都运行在这个线程； 另外，每个App进程中至少会有两个binder线程 ApplicationThread(简称AT)和ActivityManagerProxy（简称AMP），当然还有其他线程，这里不是重点就不提了。</li>
 </ul>
 <p><img src="/typora-user-images/start_service_processes.jpg"></p>
 <p>图中涉及3种IPC通信方式：<code>Binder</code>、<code>Socket</code>以及<code>Handler</code>，在图中分别用3种不同的颜色来代表这3种通信方式。一般来说，同一进程内的线程间通信采用的是 <a target="_blank" rel="noopener" href="http://gityuan.com/2015/12/26/handler-message/">Handler消息队列机制</a>，不同进程间的通信采用的是<a target="_blank" rel="noopener" href="http://gityuan.com/2015/10/31/binder-prepare/">binder机制</a>，另外与Zygote进程通信采用的<code>Socket</code>。</p>
